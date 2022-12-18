@@ -45,7 +45,7 @@
                             <div class="input-group input-spinner">
                                 <div class="input-group-prepend">
                               
-                                <a class="btn btn-light" href="{% url 'remove_cart' cart_item.product.id %}" id="button-minus"> <i class="fa fa-minus"></i> </a>
+                                <a class="btn btn-light" href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" id="button-minus"> <i class="fa fa-minus"></i> </a>
                                 </div>
                                 <input type="text" class="form-control"  value="{{ cart_item.quantity }}">
                                 <div class="input-group-append">
@@ -61,7 +61,7 @@
             </div> <!-- price-wrap .// -->
         </td>
         <td class="text-right"> 
-        <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="btn btn-danger"> Remove</a>
+        <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn btn-danger"> Remove</a>
         </td>
     </tr>
     {% endfor %}
@@ -90,7 +90,7 @@
                 <p class="text-center mb-3">
                     <img src="./images/misc/payments.png" height="26">
                 </p>
-                <a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
+                <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
                 <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->

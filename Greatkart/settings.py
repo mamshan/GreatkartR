@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     'category',
     'accounts',
     'store',
-    'carts'
+    'carts',
+    'orders'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,28 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.WARNING: 'warning',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.DEBUG: 'secondary'
+}
+
+ 
+
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.genapps.work'
+EMAIL_USE_TLS = True
+#EMAIL_PORT = 465
+EMAIL_HOST_USER ="sales@genapps.work"
+EMAIL_HOST_PASSWORD ="hCzT4rV2bg@u8zk"
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_USE_SSL = True
+#EMAIL_PORT = 465
+#EMAIL_HOST_USER ="m.shan88887@gmail.com"
+#EMAIL_HOST_PASSWORD ="871465.012"
