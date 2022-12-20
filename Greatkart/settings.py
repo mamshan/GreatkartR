@@ -27,6 +27,8 @@ SECRET_KEY = 'django-insecure-b2di%u#o5&50+_fl=(jq3hc6_tnexw9pa!3s2u)t2#+01z#4%=
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'
+
 
 
 # Application definition

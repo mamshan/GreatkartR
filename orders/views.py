@@ -22,7 +22,7 @@ def sendEmail(request, order):
 
 def payments(request):
     try:
-        if request.is_ajax() and request.method == 'POST':
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest' and request.method == 'POST':
             data = request.POST
             order_id = data['orderID']
             trans_id = data['transID']
@@ -59,9 +59,9 @@ def payments(request):
                 order_product.save()
 
                 cart_item = CartItem.objects.get(id=item.id)
-                product_variation = cart_item.variations.all()
+                 
                 order_product = OrderProduct.objects.get(id=order_product.id)
-                order_product.variations.set(product_variation)
+                
                 order_product.save()
 
                 # Reduce the quantity of the sold products
@@ -73,7 +73,7 @@ def payments(request):
             CartItem.objects.filter(user=request.user).delete()
 
             # Gửi thư cảm ơn
-            sendEmail(request=request, order=order)
+           # sendEmail(request=request, order=order)
 
             # Phản hồi lại ajax
             data = {
@@ -169,4 +169,5 @@ def order_complete(request):
         }
         return render(request, 'orders/order_complete.html', context)
     except Exception:
+
         return redirect('home')
