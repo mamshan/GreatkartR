@@ -73,8 +73,7 @@ def payments(request):
             CartItem.objects.filter(user=request.user).delete()
 
             # Gửi thư cảm ơn
-           # sendEmail(request=request, order=order)
-
+            # sendEmail(request=request, order=order)
             # Phản hồi lại ajax
             data = {
                 'order_number': order.order_number,
