@@ -215,3 +215,12 @@ def my_orders(request):
         'orders': orders
     }
     return render(request, 'accounts/my_orders.html',context=context)
+
+
+
+def edit_profile(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    context = {
+        'orders': orders
+    }
+    return render(request, 'accounts/edit_profile.html',context=context)
