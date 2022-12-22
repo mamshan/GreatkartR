@@ -15,6 +15,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from carts.views import _cart_id
 import requests
+from orders.models import Order 
 
 # Create your views here.
 
@@ -133,7 +134,13 @@ def activate(request, uidb64, token):
 
 @login_required(login_url="login")
 def dashboard(request):
-    return render(request, "accounts/dashboard.html")
+    orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
+    orders_count = orders.count()
+    context = {
+        'orders': orders, 
+        'orders_count': orders_count
+    }
+    return render(request, "accounts/dashboard.html", context)
 
 
 def forgotPassword(request):
@@ -201,3 +208,10 @@ def reset_password(request):
         else:
             messages.error(request, message="Password do not match!")
     return render(request, 'accounts/reset_password.html')
+
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True)
+    context = {
+        'orders': orders
+    }
+    return render(request, 'accounts/my_orders.html',context=context)
