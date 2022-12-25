@@ -9,16 +9,15 @@
       <div class="collapse navbar-collapse" id="navbarTop4">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-                 <a href="#" class="nav-link">   English </a>
-                
+                 <a href="#" class="nav-link">  <i class="fa fa-solid fa-phone"></i> Customer Support +94 Testing </a>
             </li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link"> USD </a>
+                <a href="#" class="nav-link"> <i class="fa fa-solid fa-envelope"></i>   Email : sales@besttyre.lk </a> 
             </li>
         </ul>
         <ul class="navbar-nav">
-            <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-            <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+            <li><a href="#" class="nav-link">  <a href="https://www.facebook.com/besttyre.lk"><i class="fab fa-brands fa-facebook"></i></a>   </li>
+            <li><a href="#" class="nav-link"> <a href="https://www.instagram.com/besttyre">  <i class="fa-brands fa-instagram"></i></a> </li>
         </ul> <!-- list-inline //  -->
       </div> <!-- navbar-collapse .// -->
     </div> <!-- container //  -->
@@ -32,21 +31,29 @@
                 <img class="logo" src="{% static './images/logo.png' %}">
             </a> <!-- brand-wrap.// -->
         </div>
+        {% for category in mainlinks %}
         <div class="col-lg col-sm col-md col-6 flex-grow-0">
             <div class="category-wrap dropdown d-inline-block float-right">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
-                    <i class="fa fa-bars"></i> All category 
-                </button>
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown"> 
+                    {{ category.category_name  }}
+                </a>
+                 
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'store' %}">All Products</a>
-                    {% for category in links %}
-                    <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
-                    {% endfor %} 
-                </div>
+
+                {% for subcategory in links %}
+                    
+                    {% if category.id ==  subcategory.category_id %}
+                    
+                        <a class="dropdown-item" href="{{ subcategory.get_url }}">{{ subcategory.subcategory_name  }}</a>
+                      
+                    {% endif %} 
+                {% endfor %} 
+            </div>
+             
             </div>  <!-- category-wrap.// -->
         </div> <!-- col.// -->
-        <a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
-        <div class="col-lg  col-md-6 col-sm-12 col">
+        {% endfor %} 
+      <!--   <div class="col-lg  col-md-6 col-sm-12 col">
             <form action="{% url 'search' %}" method="GET" class="search">
                 <div class="input-group w-100">
                     <input type="text" class="form-control" style="width:60%;" name="q" value="{{ q }}" placeholder="Search">
@@ -57,8 +64,8 @@
                       </button>
                     </div>
                 </div>
-            </form> <!-- search-wrap .end// -->
-        </div> <!-- col.// -->
+            </form> 
+        </div>  --><!-- col.// --> 
         <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
                     <div class="d-flex justify-content-end mb-3 mb-lg-0">
                         {% if user.id is None %}

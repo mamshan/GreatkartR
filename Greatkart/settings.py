@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'category.context_processors.menu_links', 
+                'category.context_processors.menu_links2', 
                 'carts.context_processors.counter',  
             ],
         },
@@ -81,6 +82,7 @@ WSGI_APPLICATION = 'Greatkart.wsgi.application'
 
 AUTH_USER_MODEL = 'accounts.Account'    # Tên model thay thế cho model user mặc định
 
+USE_THOUSAND_SEPARATOR = True
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

@@ -1,3 +1,5 @@
+import urllib
+from urllib.parse import urlparse
 from django.shortcuts import get_object_or_404, render, redirect
 
 from accounts.forms import RegistrationForm ,UserProfileForm, UserForm
@@ -15,8 +17,11 @@ from django.conf import settings
 from django.core.mail import send_mail
 from carts.views import _cart_id
 import requests
-from orders.models import Order 
-
+from orders.models import Order, OrderProduct 
+from django.core.files.base import ContentFile
+from django.core.files import File
+import urllib3 
+from django.core.files.temp import NamedTemporaryFile
 # Create your views here.
 
 
@@ -35,6 +40,9 @@ def register(request):
                 first_name=first_name, last_name=last_name, email=email, username=username, password=password)
             user.phone_number = phone_number
             user.save()
+
+
+
 
             current_site = get_current_site(request=request)
             mail_subject = 'Activate your account.'
@@ -136,9 +144,16 @@ def activate(request, uidb64, token):
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id=request.user.id, is_ordered=True)
     orders_count = orders.count()
+
+
+    userprofile = UserProfile.objects.filter(user=request.user)
+
+    #userprofile = get_object_or_404(UserProfile, user=request.user)
+
     context = {
         'orders': orders, 
-        'orders_count': orders_count
+        'orders_count': orders_count,
+        'userprofile':userprofile
     }
     return render(request, "accounts/dashboard.html", context)
 
@@ -217,21 +232,64 @@ def my_orders(request):
     return render(request, 'accounts/my_orders.html',context=context)
 
 
-
+@login_required(login_url="login")
 def edit_profile(request):
-    userprofile = get_object_or_404(UserProfile, user=request.user)
+    #userprofile = get_object_or_404(UserProfile, user=request.user)
+    unew = False
+    try:
+        unew = UserProfile.objects.filter(user=request.user).exists()
+        userprofile = UserProfile.objects.get(user=request.user)
+    except Exception:
+        if request.method == 'POST':
+            userprofile =UserProfileForm(request.POST, instance=request.user)  
+        else:
+            unew = False
+            userprofile =UserProfileForm() 
+
+
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
-        profile_form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
-        if user_form.is_valid() and profile_form.is_valid():
+        #profile_form = UserProfileForm( 
+        #    request.POST, request.FILES, user_id=request.user 
+        #    )
+        
+        if unew == False:
+           
+            profile_form =UserProfile(
+                user=request.user,
+                address_line_1= request.POST['address_line_1'],
+                address_line_2= request.POST['address_line_2'],
+                city= request.POST['city'],
+                state= request.POST['state'],
+                country= request.POST['country'], 
+            )
+
+
+
+        else:
+            profile_form = UserProfileForm(request.POST,  instance=userprofile)
+
+       
+        #profile_form.profile_picture = request.FILES.profile_picture
+
+        #profile_form = UserProfileForm( 
+           #request.POST, request.FILES
+        #)
+        #profile_form.user_id = request.user
+
+        if user_form.is_valid():
             user_form.save()
             profile_form.save()
             messages.success(request, 'Your profile has been updated')
             return redirect('edit_profile')
     else:
         user_form = UserForm(instance=request.user)
-        profile_form = UserProfileForm(instance=userprofile)
-            
+
+        if unew == True:
+            profile_form = UserProfileForm(instance=userprofile)
+        else:
+            profile_form = UserProfileForm()        
+
     context = {
         'user_form': user_form,
         'profile_form': profile_form, 
@@ -239,8 +297,45 @@ def edit_profile(request):
     }
     return render(request, 'accounts/edit_profile.html',context=context)
 
-
+@login_required(login_url="login")
 def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user= Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+
+                messages.success(request, 'Password Updated Successfully')
+                return redirect('change_password')
+            else:
+                messages.error(request,'Please enter valid current password')
+                return redirect('change_password')
+        else:
+            messages.error(request,  'Passwrod does not match')
+            return redirect('change_password')
     context = {
     }
     return render(request, 'accounts/change_password.html',context=context)
+
+
+@login_required(login_url="login")
+def order_detail(request, order_id):
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    order = Order.objects.get(order_number=order_id)
+    subtotal = 0
+    for i in order_detail:
+        subtotal += i.product_price*i.quantity
+
+    context = {
+        'order': order,
+        'order_detail': order_detail,
+        'subtotal':subtotal
+    }
+    return render(request, 'accounts/order_detail.html',context=context)

@@ -17,3 +17,15 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
+
+
+class SubCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE) 
+    subcategory_name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.subcategory_name
+
+    def get_url(self):
+        return reverse('products_by_subcategory', args=[self.category.slug, self.slug])
