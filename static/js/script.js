@@ -52,9 +52,9 @@ $(document).ready(function() {
 	} // end if
 
 
-
-
-    
+    $('.carousel').carousel({
+        interval: 2000
+      })
 }); 
 // jquery end
 

@@ -6,15 +6,19 @@ from carts.views import _cart_id
 from carts.models import Cart, CartItem
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 from django.db.models import Q
+from django.db.models import Sum
 
 def store(request, category_slug=None):
     
     if category_slug is not None:
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.all().filter(category=categories, is_available=True).order_by('id')
+        brands = Product.objects.values('brand').filter(category=categories, is_available=True)
     else:
-        products = Product.objects.all().filter(is_available=True).order_by('id')
+        products = Product.objects.all().filter(is_available=True).order_by('id') 
+        brands = Product.objects.values('brand').filter(is_available=True)
 
+    
     product_count = products.count()
     page = request.GET.get('page')
     page = page or 1
@@ -25,6 +29,7 @@ def store(request, category_slug=None):
     context = {
         'products': paged_products,
         'product_count': product_count,
+        'brands': brands
     }
     return render(request, 'store/store.html', context=context)
 
@@ -53,9 +58,9 @@ def store1(request,  category_slug=None, subcategory_slug=None):
 
 
 
-def product_detail(request, category_slug, subcategory_slug, product_slug):
+def product_detail(request, category_slug,  product_slug):
     try:
-        single_product = Product.objects.get(category__slug=category_slug,subcategory__slug=subcategory_slug, slug=product_slug)
+        single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
     except Exception as e:
         raise e
@@ -84,13 +89,17 @@ def product_detail(request, category_slug, subcategory_slug, product_slug):
 
 
 def search(request):
-    if 'q' in request.GET:
-        q = request.GET.get('q')
-        products = Product.objects.order_by('-created_date').filter(Q(product_name__icontains=q) | Q(description__icontains=q))
+    if 'width' in request.GET:
+        width = request.GET.get('width')
+        profile = request.GET.get('profile')
+        diameter = request.GET.get('diameter')
+
+        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter)
         product_count = products.count()
+
     context = {
         'products': products,
-        'q': q,
+        'q': width,
         'product_count': product_count
     }
     return render(request, 'store/store.html', context=context)

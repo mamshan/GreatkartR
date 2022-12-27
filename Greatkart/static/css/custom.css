@@ -62,3 +62,14 @@ ul.thumb li img {
 	.navbar .nav-item:hover .dropdown-menu{ display: block; }
 	.navbar .nav-item .dropdown-menu{ margin-top:0; }
 }	
+
+ 
+
+  a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #2A6496; 
+}

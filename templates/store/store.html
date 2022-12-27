@@ -35,15 +35,9 @@
 			<div class="card-body">
 				
 				<ul class="list-menu"> 
-				{% for category in mainlinks %}	
+				{% for category in links %}	
 				<li><a href="{{ category.get_url }}"> {{ category.category_name  }}</a></li>
-					<ul>
-                {% for subcategory in links %}
-				{% if category.id ==  subcategory.category_id %}
-				<li><a href="{{ subcategory.get_url }}">{{ subcategory.subcategory_name  }}</a></li>
-				{% endif %} 
-				{% endfor %} 
-					</ul>
+					 
 
 				{% endfor %} 
 				 
@@ -66,25 +60,13 @@
 		</header>
 		<div class="filter-content collapse show" id="collapse_4" style="">
 			<div class="card-body">
+				{% for brand in brands %}	
 			  <label class="checkbox-btn">
 			    <input type="checkbox">
-			    <span class="btn btn-light"> XS </span>
+			    <span class="btn btn-light"> {{ brand.brand }} </span>
 			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> SM </span>
-			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> LG </span>
-			  </label>
-
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> XXL </span>
-			  </label>
+			  {% endfor %} 
+			  
 		</div><!-- card-body.// -->
 		</div>
 	</article> <!-- filter-group .// -->

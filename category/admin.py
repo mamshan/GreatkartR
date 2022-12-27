@@ -4,7 +4,7 @@ from category.models import Category , SubCategory
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('category_name',)}  # Gợi ý trường slug theo category_name
-    list_display = ('category_name', 'slug')
+    list_display = ('category_name', 'slug', 'order_pos')
 
 class SubCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('subcategory_name',)}  # Gợi ý trường slug theo category_name

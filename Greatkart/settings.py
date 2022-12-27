@@ -70,8 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'category.context_processors.menu_links', 
-                'category.context_processors.menu_links2', 
+                'category.context_processors.menu_links',  
                 'carts.context_processors.counter',  
             ],
         },
@@ -134,7 +133,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [
     'Greatkart/static'
 ]
-
+ 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

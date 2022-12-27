@@ -7,6 +7,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField(max_length=255, blank=True)
     category_image = models.ImageField(upload_to='photos/categories/', blank=True)
+    order_pos = models.IntegerField()
 
     class Meta:
         verbose_name = 'category'
@@ -20,7 +21,7 @@ class Category(models.Model):
 
 
 class SubCategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE) 
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING) 
     subcategory_name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
 
