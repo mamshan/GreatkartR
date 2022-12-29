@@ -1344,7 +1344,7 @@ a[class*=card]:hover .title {
 /* ================== PAGES =================== */
 /* ================ PAGES HEADER ================== */
 .section-pagetop {
-  padding: 45px 0;
+  padding: 15px 0;
 }
 
 /* ================== PAGE DETAILS ==================  */
@@ -1413,3 +1413,45 @@ a[class*=card]:hover .title {
 }
 
 /*# sourceMappingURL=ui.css.map */
+
+.right-sticky-callback {
+  display: block;
+  position: fixed;
+  right: -60px;
+  transform: rotate(-90deg);
+  top: 50%;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.right-sticky-callback .callback-request img {
+  width: 100%;
+  max-width: 20px;
+  margin-right: 5px;
+  transform: rotate(90deg);
+}
+
+.right-sticky-callback .callback-request {
+  padding: 12px 7px 12px 10px;
+  border-radius: 2px;
+  box-shadow: 0 0 4px 0 rgb(0 0 0 / 18%);
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+}
+
+.right-sticky-callback div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 70%;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: "poppins",sans-serif;
+}
+
+.right-sticky-callback .callback-request h3 {
+  font-size: 14px;
+  color: #fff;
+  padding-bottom: 15px;
+}
