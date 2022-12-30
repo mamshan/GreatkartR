@@ -7,6 +7,8 @@ from carts.models import Cart, CartItem
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 from django.db.models import Q
 from django.db.models import Sum
+from django.db.models import Sum, Count
+from django.http import JsonResponse
 
 def store(request, category_slug=None):
     
@@ -103,3 +105,18 @@ def search(request):
         'product_count': product_count
     }
     return render(request, 'store/store.html', context=context)
+
+def get_sizes(request):
+    width =""
+    if 'width' in request.GET:
+        width = request.GET.get('width') 
+        width = Product.objects.values('height').filter(width__icontains=width,is_available=True).exclude(width__exact='').annotate(Count('id'))
+        product_count = width.count()
+
+    if 'profile' in request.GET:
+        width = request.GET.get('profile') 
+        width = Product.objects.values('diameter').filter(height__icontains=width,is_available=True).exclude(width__exact='').annotate(Count('id'))
+        product_count = width.count()    
+        
+
+    return JsonResponse({"width": list(width), "product_count": product_count }, status=200)

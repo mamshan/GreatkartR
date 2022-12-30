@@ -56,7 +56,7 @@
 
                 <label class="col-sm-2 " for="width">Width</label>
                 <div class="col-sm-5"> 
-                <select class="form-control" id="width"name="width">
+                <select class="form-control" onclick="getsizes('width');" id="width"name="width">
                 {% for width in width %}
                     <option>{{ width.width }}</option>
                 {% endfor %}
@@ -67,7 +67,7 @@
                 <div class="form-group row">
                 <label class="col-sm-2" for="profile">Profile</label>
                 <div class="col-sm-5"> 
-                <select class="form-control" id="profile"name="profile">
+                <select class="form-control" onclick="getsizes('profile');" id="profile"name="profile">
                 {% for height in height %}
                     <option>{{ height.height }}</option>
                 {% endfor %}
@@ -77,7 +77,7 @@
                 <div class="form-group row">
                 <label class="col-sm-2" for="diameter">Rim Size</label>
                 <div class="col-sm-5"> 
-                <select class="form-control" id="diameter"name="diameter">
+                <select class="form-control"  id="diameter"name="diameter">
                 {% for diameter in diameter %}
                     <option>{{ diameter.diameter }}</option>
                 {% endfor %}
@@ -100,7 +100,7 @@
   
 
       
-        <img class="rounded mx-auto d-block" src="{% static 'images/banners/kenda.png' %}">
+        <img class="rounded mx-auto d-block img-fluid" src="{% static 'images/banners/kenda.png' %}">
     
 </div>   
 
@@ -132,6 +132,66 @@
     setTimeout(function () {
         $('#myModal2').modal('show');
     }, 2000);
+
+
+    function getsizes(cmbselect) {
+
+      
+        // preventing from page reload and default actions
+       
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        // make POST ajax call
+
+        var data = new FormData();
+        
+        if (cmbselect == "width") {
+            var dataString = "width="+ document.getElementById("width").value;
+        }
+        if (cmbselect == "profile") {
+            var dataString = "profile="+ document.getElementById("profile").value;
+        }
+         
+        
+
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'get_sizes' %}",
+            data: dataString,
+            success: function (response) {
+                if (cmbselect == "width") {
+                    var mySelect = document.getElementById('profile');
+                    mySelect.options.length = 0;
+                    i = 0;
+                    response.width.forEach(function (item) { 
+                        mySelect.options[i] = new Option (item.height, item.height);
+                        i = i +1;
+                    }); 
+                }
+
+                if (cmbselect == "profile") {
+                    var mySelect = document.getElementById('diameter');
+                    mySelect.options.length = 0;
+                    i = 0;
+                    response.width.forEach(function (item) { 
+                        mySelect.options[i] = new Option (item.diameter, item.diameter);
+                        i = i +1;
+                    }); 
+                }
+
+                 
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        })
+    }
+
+     
+
+
+
 </script>
 <!-- ========================= SECTION  END// ========================= -->
 {% endblock %}
