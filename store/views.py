@@ -114,9 +114,27 @@ def get_sizes(request):
         product_count = width.count()
 
     if 'profile' in request.GET:
-        width = request.GET.get('profile') 
-        width = Product.objects.values('diameter').filter(height__icontains=width,is_available=True).exclude(width__exact='').annotate(Count('id'))
+        width = request.GET.get('width') 
+        profile = request.GET.get('profile')  
+        width = Product.objects.values('diameter').filter(width__icontains=width,height__icontains=profile,is_available=True).exclude(width__exact='').annotate(Count('id'))
         product_count = width.count()    
         
 
     return JsonResponse({"width": list(width), "product_count": product_count }, status=200)
+
+
+def search(request):
+    if 'width' in request.GET:
+        width = request.GET.get('width')
+        profile = request.GET.get('profile')
+        diameter = request.GET.get('diameter')
+
+        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter)
+        product_count = products.count()
+
+    context = {
+        'products': products,
+        'q': width,
+        'product_count': product_count
+    }
+    return render(request, 'store/store_search.html', context=context)

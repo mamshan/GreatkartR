@@ -28,7 +28,7 @@ def add_cart(request, product_id):
         if is_exists_cart_item:
             try:
                 cart = Cart.objects.get(cart_id=_cart_id(request=request))  # Get cart using the _cart_id
-                cart_item = CartItem.objects.get(product=product, cart=cart,user=current_user)
+                cart_item = CartItem.objects.get(product=product, user=current_user)
                 cart_item.quantity += 1
                 cart_item.save()
             except CartItem.DoesNotExist:

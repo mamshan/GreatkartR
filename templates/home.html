@@ -50,13 +50,14 @@
             </div>
             
             <div class="col-sm-5">
-            <form action="{% url 'search' %}" method="GET" class="search">
+            <form action="{% url 'search_size' %}" method="GET" class="search">
 
                 <div class="form-group row">
 
                 <label class="col-sm-2 " for="width">Width</label>
                 <div class="col-sm-5"> 
                 <select class="form-control" onclick="getsizes('width');" id="width"name="width">
+                    <option>Width</option>
                 {% for width in width %}
                     <option>{{ width.width }}</option>
                 {% endfor %}
@@ -68,9 +69,9 @@
                 <label class="col-sm-2" for="profile">Profile</label>
                 <div class="col-sm-5"> 
                 <select class="form-control" onclick="getsizes('profile');" id="profile"name="profile">
-                {% for height in height %}
-                    <option>{{ height.height }}</option>
-                {% endfor %}
+               
+                    <option>Profile</option>
+                
                 </select>
                 </div>
                 </div>
@@ -78,9 +79,9 @@
                 <label class="col-sm-2" for="diameter">Rim Size</label>
                 <div class="col-sm-5"> 
                 <select class="form-control"  id="diameter"name="diameter">
-                {% for diameter in diameter %}
-                    <option>{{ diameter.diameter }}</option>
-                {% endfor %}
+                
+                    <option>Rim Size</option>
+                
                 </select>
                 </div>
                 </div>
@@ -149,7 +150,7 @@
             var dataString = "width="+ document.getElementById("width").value;
         }
         if (cmbselect == "profile") {
-            var dataString = "profile="+ document.getElementById("profile").value;
+            var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value;
         }
          
         
@@ -162,17 +163,23 @@
                 if (cmbselect == "width") {
                     var mySelect = document.getElementById('profile');
                     mySelect.options.length = 0;
-                    i = 0;
+                    mySelect.options[0] = new Option ("Profile", "Profile");
+                    i = 1;
                     response.width.forEach(function (item) { 
                         mySelect.options[i] = new Option (item.height, item.height);
                         i = i +1;
                     }); 
+                    var mySelect = document.getElementById('diameter');
+                    mySelect.options.length = 0;
+                    mySelect.options[0] = new Option ("Rim Size", "Rim Size");
+
                 }
 
                 if (cmbselect == "profile") {
                     var mySelect = document.getElementById('diameter');
                     mySelect.options.length = 0;
-                    i = 0;
+                    mySelect.options[0] = new Option ("Rim Size", "Rim Size");
+                    i = 1;
                     response.width.forEach(function (item) { 
                         mySelect.options[i] = new Option (item.diameter, item.diameter);
                         i = i +1;
