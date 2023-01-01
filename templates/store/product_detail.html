@@ -80,4 +80,42 @@
     </div> <!-- container .//  -->
     </section>
 
+
+ 
+   
+  
+  <div class="container">
+    <header class="border-bottom mb-4 pb-3">
+      <div class="form-inline">
+        <span class="mr-md-auto">Related Items</span>
+        
+      </div>
+  </header><!-- sect-heading -->
+  <div class="row">
+    {% if relastedprod %}
+      {% for product in relastedprod %}
+    <div class="col-md-4">
+      <figure class="card card-product-grid">
+        <div class="img-wrap"> 
+          
+          <img src="{{ product.images.url }}">
+          
+        </div> <!-- img-wrap.// -->
+        <figcaption class="info-wrap">
+          <div class="fix-height">
+            <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+            <div class="price-wrap mt-2">
+              <span class="price">{{ product.price }}</span> 
+            </div> <!-- price-wrap.// -->
+          </div>
+          <a href="{% url 'add_cart' product.id %}" class="btn btn-block btn-primary">Add to cart </a>
+        </figcaption>
+      </figure>
+    </div> <!-- col.// -->
+      {% endfor %}
+    
+    {% endif %}
+  </div> <!-- row end.// -->
+</div>  
+
     {% endblock %}

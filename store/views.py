@@ -14,12 +14,11 @@ def store(request, category_slug=None):
     
     if category_slug is not None:
         categories = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.all().filter(category=categories, is_available=True).order_by('id')
-        brands = Product.objects.values('brand').filter(category=categories, is_available=True)
+        products = Product.objects.all().filter(category=categories, is_available=True).order_by('id') 
+        brands = Product.objects.values('brand').filter(category=categories, is_available=True).annotate(Count('id'))
     else:
-        products = Product.objects.all().filter(is_available=True).order_by('id') 
-        brands = Product.objects.values('brand').filter(is_available=True)
-
+        products = Product.objects.all().filter(is_available=True).order_by('id')  
+        brands = Product.objects.values('brand').filter(is_available=True).annotate(Count('id'))
     
     product_count = products.count()
     page = request.GET.get('page')
@@ -75,6 +74,12 @@ def product_detail(request, category_slug,  product_slug):
     else:
         orderproduct = None  
 
+    try:
+        relastedprod = Product.objects.filter(width__icontains=single_product.width, height__icontains=single_product.height, diameter__icontains=single_product.diameter).exclude(id=single_product.id)
+    except OrderProduct.DoesNotExist:
+        relastedprod = None
+
+
     product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
 
 
@@ -83,7 +88,8 @@ def product_detail(request, category_slug,  product_slug):
         'single_product': single_product,
         'in_cart': in_cart if 'in_cart' in locals() else False,
         'product_gallery':product_gallery,
-        'orderproduct':orderproduct
+        'orderproduct':orderproduct,
+        'relastedprod': relastedprod
     }
     return render(request, 'store/product_detail.html', context=context)
 
@@ -129,12 +135,30 @@ def search(request):
         profile = request.GET.get('profile')
         diameter = request.GET.get('diameter')
 
+        view = request.GET.get('view1')
+
         products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter)
         product_count = products.count()
+
+
+    widths = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
+   
+ 
 
     context = {
         'products': products,
         'q': width,
-        'product_count': product_count
+        'product_count': product_count,
+        'width': widths,
+        'swidth': width,
+        'sprofile': profile,
+        'sdiameter': diameter,
+        
     }
-    return render(request, 'store/store_search.html', context=context)
+
+
+
+    if view == "view1":   
+        return render(request, 'store/store_search.html', context=context)
+    else:
+        return render(request, 'store/store_search_view.html', context=context)

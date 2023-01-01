@@ -1457,3 +1457,71 @@ a[class*=card]:hover .title {
   padding-bottom: 15px;
 }
 
+
+.topbar {
+  background-color: #1346af;
+  padding: 4px 0;
+}
+
+.topbar .woostify-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.topbar * {
+  color: #ffffff;
+  flex-direction: row;
+}
+
+.topbar .topbar-item {
+  flex-grow: 1;
+}
+.topbar * {
+  color: #ffffff;
+}
+
+
+@media (min-width: 991px) {
+  .topbar .topbar-center {
+      text-align: center;
+  }
+  }
+  .topbar .topbar-item {
+      flex-grow: 1;
+  }
+
+  .topbar .topbar-right {
+    text-align: right;
+}
+
+@media (max-width: 600px) {
+  .topbar .container {
+    flex-direction: column;
+  }
+  .topbar .container .p-2 {
+    text-align: center;
+  }
+}
+
+.modal-content {
+  border-radius: 0rem;
+}
+
+.btn {
+  border-radius: 0rem;
+}
+
+.form-control {
+  border-radius: 0rem;
+}
+
+.blHMux svg {
+  width: 60px;
+  height: 60px;
+  fill: rgb(0, 124, 194);
+}

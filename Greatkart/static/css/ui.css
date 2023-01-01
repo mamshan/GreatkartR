@@ -1455,3 +1455,87 @@ a[class*=card]:hover .title {
   color: #fff;
   padding-bottom: 15px;
 }
+
+.topbar {
+  background-color: #1346af;
+  padding: 4px 0;
+}
+
+.topbar .woostify-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+ 
+
+.topbar .topbar-item {
+  flex-grow: 1;
+}
+.topbar * {
+  color: #ffffff;
+  flex-direction: row;
+}
+
+
+.topbar .topbar-center {
+    text-align: center;
+}
+
+.topbar .topbar-item {
+    flex-grow: 1;
+}
+
+.topbar .topbar-right {
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .topbar .container {
+    flex-direction: column;
+  }
+  .topbar .container .p-2 {
+    text-align: center;
+  }
+}
+
+
+
+element.style {
+}
+.modal.left .modal-body, .modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.modal-content {
+  border-radius: 0rem;
+}
+
+.btn {
+  border-radius: 0rem;
+}
+
+.form-control {
+  border-radius: 0rem;
+}
+
+.blHMux svg {
+  width: 60px;
+  height: 60px;
+  fill: rgb(0, 124, 194);
+}
