@@ -339,3 +339,13 @@ def order_detail(request, order_id):
         'subtotal':subtotal
     }
     return render(request, 'accounts/order_detail.html',context=context)
+
+
+def orders(request):
+        orders = OrderProduct.objects.filter(ordered=True).select_related('order').filter(order__status='New')
+
+        context = {
+            'orders': orders,
+        }
+        return render(request, 'admin/orders.html', context)
+    

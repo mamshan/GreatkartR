@@ -71,7 +71,11 @@ ul.thumb li img {
 }
 
 a:hover, a:focus {
-    color: #2A6496; 
+    color: black; 
+}
+
+.topbar a:hover, a:focus {
+    color: white; 
 }
 
 

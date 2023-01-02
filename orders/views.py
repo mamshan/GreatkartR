@@ -170,3 +170,4 @@ def order_complete(request):
     except Exception:
 
         return redirect('home')
+
