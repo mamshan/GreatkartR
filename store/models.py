@@ -5,6 +5,7 @@ from django.urls import reverse
 # Create your models here.
 
 class Product(models.Model):
+    skuno = models.CharField(max_length=200, unique=True)
     product_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(max_length=500, blank=True)
@@ -14,8 +15,10 @@ class Product(models.Model):
     width = models.CharField(max_length=10, blank=True)
     height = models.CharField(max_length=10, blank=True)
     diameter = models.CharField(max_length=10, blank=True)
-    
+    terrain = models.CharField(max_length=20, blank=True)
+
     price = models.IntegerField()
+    discount = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
@@ -25,6 +28,9 @@ class Product(models.Model):
 
     def get_url(self):
         return reverse('product_detail', args=[self.category.slug, self.slug])
+
+    def get_selling(self):
+        return int(self.price * ((100-self.discount)/100))
 
     def __str__(self):
         return self.product_name

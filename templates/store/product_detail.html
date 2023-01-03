@@ -52,7 +52,10 @@
           <div class="col-sm-2">Country</div>
           <div class="col-sm-3">{{ single_product.country }}</div>
         </div> <!-- row.// -->
-     
+        <div class="row">
+          <div class="col-sm-2">Stock</div>
+          <div class="col-sm-3" id="stock_det"></div>
+        </div> <!-- row.// -->
         <hr>
         {% if single_product.stock <= 0  %}
         <h5 class="text-danger">Out of Stock</h5>
@@ -117,5 +120,17 @@
     {% endif %}
   </div> <!-- row end.// -->
 </div>  
+
+<script>
+
+
+
+
+
+
+</script>
+
+
+
 
     {% endblock %}
