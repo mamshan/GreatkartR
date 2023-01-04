@@ -14,10 +14,10 @@ def store(request, category_slug=None):
     
     if category_slug is not None:
         categories = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.all().filter(category=categories, is_available=True).order_by('id') 
+        products = Product.objects.all().filter(category=categories, is_available=True).order_by('-price') 
         brands = Product.objects.values('brand').filter(category=categories, is_available=True).annotate(Count('id'))
     else:
-        products = Product.objects.all().filter(is_available=True).order_by('id')  
+        products = Product.objects.all().filter(is_available=True).order_by('-price')  
         brands = Product.objects.values('brand').filter(is_available=True).annotate(Count('id'))
     
     product_count = products.count()
