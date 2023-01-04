@@ -29,21 +29,25 @@ def add_cart(request, product_id):
             try:
                 cart = Cart.objects.get(cart_id=_cart_id(request=request))  # Get cart using the _cart_id
                 cart_item = CartItem.objects.get(product=product, user=current_user)
+                
                 cart_item.quantity += 1
                 cart_item.save()
             except CartItem.DoesNotExist:
-
+                saleprice = product.price * ((100-product.discount)/100)
                 cart_item = CartItem.objects.create(
                     product=product,
+                    price=saleprice,
                     cart=cart,
                     user=current_user,
                     quantity=1
                 )
                 cart_item.save()
         else:
+            saleprice = product.price * ((100-product.discount)/100)
             cart_item = CartItem.objects.create(
                     product=product,
                     cart=cart,
+                    price=saleprice,
                     user=current_user,
                     quantity=1
                 )
@@ -62,8 +66,10 @@ def add_cart(request, product_id):
             cart_item.quantity += 1
             cart_item.save()
         except CartItem.DoesNotExist:
+            saleprice = product.price * ((100-product.discount)/100)
             cart_item = CartItem.objects.create(
                 product=product,
+                price=saleprice,
                 cart=cart,
                 quantity=1
             )
@@ -79,8 +85,8 @@ def cart(request, total=0, quantity=0, cart_items=None):
             cart = Cart.objects.get(cart_id=_cart_id(request=request))
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         for cart_item in cart_items:
-                price = cart_item.product.price * ((100-cart_item.product.discount)/100)
-                total += price * cart_item.quantity
+                 
+                total += cart_item.price * cart_item.quantity
                 quantity += cart_item.quantity
         tax = total * 2 / 100
         grand_total = total + tax
@@ -147,8 +153,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         # cart = Cart.objects.get(cart_id=_cart_id(request=request))
         cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         for cart_item in cart_items:
-            price = cart_item.product.get_selling
-            total += price * cart_item.quantity
+            total += cart_item.price * cart_item.quantity
             quantity += cart_item.quantity
         tax = total * 2 / 100
         grand_total = total + tax

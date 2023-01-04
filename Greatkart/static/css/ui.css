@@ -1066,9 +1066,12 @@ a[class*=card]:hover .title {
 .price-old {
   color: #969696;
   margin-left: 3px;
-  font-size: 85%;
-}
+  margin-right: 3px;  
+  text-decoration: line-through;
+  text-decoration-color: red;
+  font-style: italic;
 
+}
 .icon-control {
   margin-top: 5px;
   float: right;
@@ -1560,4 +1563,21 @@ div {
   z-index: 2;
   line-height: 1;
   direction: ltr;
+}
+
+.searchseation {
+  align-content: flex-end;
+  top:20px;
+  position: absolute;
+}
+
+
+@media only screen and (min-width: 1167px) {
+.searchseation {
+    width: calc(100% - 50px);
+    height: auto;
+    padding: 40px 30px 25px;
+    position: relative;
+    background-color: rgba(50,50,50,.9);
+}
 }

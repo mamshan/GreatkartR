@@ -104,13 +104,10 @@
 					<div class="price-wrap mt-2">
 					
 						{% if product.discount > 0 %}
-						<del aria-hidden="true">
+						 
 						<span class="price-old">{{ product.price }}</span>
-						
-						</del>
-						
+						 
 						<span class="price">{{ product.get_selling }}</span>
-
 						{% else %}
 						<span class="price">{{ product.price }}</span>
 						{% endif %}

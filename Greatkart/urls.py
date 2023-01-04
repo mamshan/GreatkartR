@@ -23,9 +23,9 @@ urlpatterns = [
     path('master/', admin.site.urls),
     path('', views.home, name='home'), 
     path('brands/', views.brands, name='brands'), 
+    path('faq/', views.faq, name='faq'),
     path('store/', include('store.urls')),
     path('cart/', include('carts.urls')),
     path('accounts/', include('accounts.urls')),
     path('orders/', include('orders.urls')),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

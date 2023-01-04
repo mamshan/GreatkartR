@@ -116,7 +116,17 @@
 				<div class="fix-height">
 					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
 					<div class="price-wrap mt-2">
-						<span class="price">{{ product.price }}</span> 
+						{% if product.discount > 0 %}
+						
+						<span class="price-old">{{ product.price }}</span>
+						
+						<span class="price">{{ product.get_selling }}</span>
+						{% else %}
+						<span class="price">{{ product.price }}</span>
+						{% endif %}
+
+
+
 					</div> <!-- price-wrap.// -->
 				</div>
 				<a href="{% url 'add_cart' product.id %}" class="btn btn-block btn-primary">Add to cart </a>

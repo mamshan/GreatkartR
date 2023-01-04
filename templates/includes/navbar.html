@@ -28,7 +28,7 @@
           <ul class="navbar-nav ml-auto">
 
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             {% for category in links %}
 
@@ -41,7 +41,7 @@
               <a class="nav-link" href="{% url 'brands' %}">Our Brands</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">FAQ</a>
+              <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
             </li>
              
             <li class="nav-item active">

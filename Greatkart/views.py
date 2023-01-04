@@ -13,7 +13,7 @@ def home(request):
 
  
 
-    products = Product.objects.all().filter(is_available=True)
+    products = Product.objects.all().filter(width__exact='235',is_available=True)
     context = {
         'products': products,
         'width': width,
@@ -38,3 +38,6 @@ def brands(request):
         'diameter': diameter,
     }
     return render(request, 'home/brands.html', context)
+
+def faq(request):
+    return render(request, 'home/faq.html')
