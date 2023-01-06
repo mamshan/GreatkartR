@@ -10,20 +10,29 @@ from django.db.models import Sum
 from django.db.models import Sum, Count
 from django.http import JsonResponse
 
-def store(request, category_slug=None):
+def store(request, category_slug=None, brand=None):
     
     if category_slug is not None:
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.all().filter(category=categories, is_available=True).order_by('-price') 
         brands = Product.objects.values('brand').filter(category=categories, is_available=True).annotate(Count('id'))
+
+        if brand is not None:
+            products = Product.objects.all().filter(category=categories,brand=brand, is_available=True).order_by('-price') 
+            brands = Product.objects.values('brand').filter(category=categories, brand=brand,is_available=True).annotate(Count('id'))
+
     else:
         products = Product.objects.all().filter(is_available=True).order_by('-price')  
         brands = Product.objects.values('brand').filter(is_available=True).annotate(Count('id'))
-    
+
+        if brand is not None:
+            products = Product.objects.all().filter(brand=brand, is_available=True).order_by('-price') 
+            brands = Product.objects.values('brand').filter(brand=brand,is_available=True).annotate(Count('id'))
+
     product_count = products.count()
     page = request.GET.get('page')
     page = page or 1
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 12)
     paged_products = paginator.get_page(page)
     product_count = products.count()
 
@@ -59,7 +68,7 @@ def store1(request,  category_slug=None, subcategory_slug=None):
 
 
 
-def product_detail(request, category_slug,  product_slug):
+def product_detail(request, category_slug,  product_slug, brand):
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()

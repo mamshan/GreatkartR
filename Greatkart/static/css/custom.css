@@ -72,9 +72,11 @@ a:hover, a:focus {
     color: black; 
 }
 
-.topbar a:hover, a:focus {
+.topbar a:hover, .topbar a:focus {
     color: white; 
 }
+
+
 .modal.left .modal-dialog,
 	.modal.right .modal-dialog {
 		position: fixed;
@@ -144,3 +146,12 @@ a:hover, a:focus {
 		line-height: 1;
 		direction: ltr;
 	}
+
+	.zoom {  
+		transition: transform .2s; /* Animation */ 
+		margin: 0 auto;
+	  }
+	  
+	  .zoom:hover {
+		transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+	  }

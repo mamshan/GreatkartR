@@ -4,65 +4,128 @@
 {% block content %}
 <!-- ========================= SECTION MAIN ========================= -->
 <section class="section-intro padding-y-sm">
-    <div class="container">
-        <div  style="align: center;" class="intro-banner-wrap">
-            {% include "includes/alerts.html" %}
-           
-        </div>
-    </div> <!-- container //  -->
-    
-    <div class='col-lg-12'>
-
-        <div class="accordion" id="accordionExample">
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Returns and Cancellations
-                  </button>
-                </h2>
-              </div>
-          
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                <div class="card-body">
-                  Some placeholder content for the first accordion panel. This panel is shown by default, thanks to the <code>.show</code> class.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="headingTwo">
-                <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Collapsible Group Item #2
-                  </button>
-                </h2>
-              </div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                  Some placeholder content for the second accordion panel. This panel is hidden by default.
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header" id="headingThree">
-                <h2 class="mb-0">
-                  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Collapsible Group Item #3
-                  </button>
-                </h2>
-              </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <div class="card-body">
-                  And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
-                </div>
-              </div>
-            </div>
-          </div>
+  <div class="container">
+    <div  style="align: center;" class="intro-banner-wrap">
+      {% include "includes/alerts.html" %}
+      
     </div>
+  </div> <!-- container //  -->
+  
+  <div class='container'>
     
+    <h4 class="text-center">Frequently Asked Question’s</h4>
+
+
+
+    <div id="accordion">
+      <h6>
+        <a role="button" data-toggle="collapse" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+          About Us
+        </a>
+      </h6>
+      <div id="collapse-1" class="collapse show" data-parent="#accordion" aria-labelledby="heading-1">
+        <div id="accordion-1">
+          <p class="ml-4">
+            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
+              What is besttyre.lk?
+            </a>
+          </p>
+          <div id="collapse-1-1" class="collapse  ml-5 m-2" data-parent="#accordion-1" aria-labelledby="heading-1-1">
+            
+            besttyre.lk is an online marketplace that makes shopping for tyres and related products and services easy and hassle-free. We know that the process of choosing the right tyre and tyre dealer or service provider can be a great pain and we want to strive to reduce that pain for you.
+              
+          </div>
+          <p class="ml-4">
+            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-1-2" aria-expanded="false" aria-controls="collapse-1-2">
+              Are the tyres I buy from besttyre.lk under warranty.
+            </a>
+          </p>
+          <div id="collapse-1-2" class="collapse ml-5 m-2" data-parent="#accordion-1" aria-labelledby="heading-1-2">
+            Every tyre you purchase on besttyre.lk comes with full manufacturers warranty.
+          </div>
+        </div>      
+      </div>
+
+
+
+      <h6 class="mt-3">
+        <a role="button" data-toggle="collapse" href="#collapse-2" aria-expanded="true" aria-controls="collapse-2">
+          About Tyres
+        </a>
+      </h6>
+      <div id="collapse-2" class="collapse show" data-parent="#accordion" aria-labelledby="heading-2">
+        <div id="accordion-2">
+          <p class="ml-4">
+            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2-1" aria-expanded="false" aria-controls="collapse-2-1">
+              How to read tyre size?
+            </a>
+          </p>
+          <div id="collapse-2-1" class="collapse  ml-5 m-2" data-parent="#accordion-2" aria-labelledby="heading-2-1">
+            
+            The first number from the left denotes the width of the tyre. The second number denotes the height of the sidewall which is also known as aspect ratio. It is expressed as percentage of the width. The alphabet in the 3rd position talks about the tyre construction type. The last number denoted the rim size.
+
+              
+          </div>
+          <p class="ml-4">
+            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-2-2" aria-expanded="false" aria-controls="collapse-2-2">
+              How do I take care of my new tyres?
+            </a>
+          </p>
+          <div id="collapse-2-2" class="collapse ml-5 m-2" data-parent="#accordion-2" aria-labelledby="heading-2-2">
+            1. With a tyre-pressure gauge, check your tyre pressure at least once a month.
+            2. Check your tyres for cuts, snags, punctures, other damages, and uneven tyre wear on a regular basis.
+            3. Have your alignment examined as soon as you notice abnormal tread wear.
+            4. When mounting the new tyres on the wheels, double-check that they are balanced.
+            5. Change your worn out tyres as soon as you notice. Otherwise It may cuse to many other issues of your vehicle and may cause to handling & braking.
+          </div>
+        </div>      
+      </div>
+
+
+
+      <h6 class="mt-3">
+        <a role="button" data-toggle="collapse" href="#collapse-3" aria-expanded="true" aria-controls="collapse-3">
+          About Returns & Wrranty.
+        </a>
+      </h6>
+      <div id="collapse-3" class="collapse show" data-parent="#accordion" aria-labelledby="heading-3">
+        <div id="accordion-3">
+          <p class="ml-4">
+            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3-1" aria-expanded="false" aria-controls="collapse-3-1">
+              How to return your tyres?
+            </a>
+          </p>
+          <div id="collapse-3-1" class="collapse  ml-5 m-2" data-parent="#accordion-3" aria-labelledby="heading-3-1">
+            
+            All returns are subject to inspection by the partner's tyre expert. Only unfitted, unused tyre that has never been driven on and is not damaged is eligible for return. Orders that are picked up at one of our fitment partners are only eligible for immediate return or exchange on the same day they are picked up. After that time, orders must be reviewed by a returns expert before an exchange can be considered. Allow 5-7 business days to process the return request. You can either send us an email at sales@besttyre.lk or call +77 7788 777 and speak to a return specialist if you need any further help.
+
+              
+          </div>
+          <p class="ml-4">
+            <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-3-2" aria-expanded="false" aria-controls="collapse-3-2">
+              How can I get my warranty claims?
+            </a>
+          </p>
+          <div id="collapse-3-2" class="collapse ml-5 m-2" data-parent="#accordion-3" aria-labelledby="heading-3-2">
+            Contact us. Get in touch with our Tyre Care Specialist . Hotline -0117 777 770 Technical Assistance Team - 77 7777777
+          </div>
+        </div>      
+      </div>
+
+
+
+
+
+
+    </div>
+
+  </div>
+  
+</div>
+
 </section>
 <!-- ========================= SECTION MAIN END// ========================= -->
- 
+
 <!-- ========================= SECTION  END// ========================= -->
 {% endblock %}
 
