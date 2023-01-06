@@ -4,53 +4,102 @@
 {% block content %}
 <!-- ========================= SECTION MAIN ========================= -->
 <section class="section-intro padding-y-sm">
-    <div class="container">
-        <div  style="align: center;" class="intro-banner-wrap">
-            {% include "includes/alerts.html" %}
-           
-        </div>
-    </div> <!-- container //  -->
+  <div class="container">
+    <div  style="align: center;" class="intro-banner-wrap">
+      {% include "includes/alerts.html" %}
+      
+    </div>
+  </div> <!-- container //  -->
+  
+  <div class='container'>
     
-    <div class='container'>
-
-      <div class="row mx-auto"  style="float: center;">
-       <div class="col-sm-2 zoom"> 
-      <img src="{% static 'images/banners/NANKANG.jpg'  %}" alt="..." class="img-thumbnail  rounded mx-auto d-block">
-       </div>
-       <div class="col-sm-2 zoom"> 
-      <img src="{% static 'images/banners/APLUS.jpg'  %}" alt="..." class="img-thumbnail  rounded mx-auto d-block">
-    </div>
-    <div class="col-sm-2 zoom"> 
-      <img src="{% static 'images/banners/SONAR.jpg'  %}" alt="..." class="img-thumbnail  rounded mx-auto d-block">
-    </div>
-     
-    </div>
-      <div class="row mx-auto">
-        <div class="col-sm-2 zoom"> 
-      <img src="{% static 'images/banners/KENDA.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
-    </div>
-    <div class="col-sm-2 zoom"> 
-      <img src="{% static 'images/banners/WEST.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
-    </div>
-    <div class="col-sm-2 zoom"> 
-      <img src="{% static 'images/banners/COOPER.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
-    </div>
-   
-      <div class="row mx-auto">
-        <div class="col-sm-2 zoom"> 
-          <img src="{% static 'images/banners/JK.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
-        </div>
-        <div class="col-sm-2 zoom"> 
-     <img src="{% static 'images/banners/CEAT.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
-    </div>
-     
+    <div class="row mx-auto"  style="float: center;">
+      <div class="col-sm-2 zoom"> 
+        <a onclick="getbrand('nankang');" href="#nankang">
+        <img src="{% static 'images/banners/NANKANG.jpg'  %}" onclick=""  alt="..." class="img-thumbnail  rounded mx-auto d-block">
+        </a>
       </div>
-     
+      <div class="col-sm-2 zoom"> 
+        <a onclick="getbrand('aplus');" href="#aplus">
+        <img src="{% static 'images/banners/APLUS.jpg'  %}" alt="..." class="img-thumbnail  rounded mx-auto d-block">
+      </a>
+      </div>
+      <div class="col-sm-2 zoom"> 
+        <a onclick="getbrand('sonar');" href="#sonar">
+        <img src="{% static 'images/banners/SONAR.jpg'  %}" alt="..." class="img-thumbnail  rounded mx-auto d-block">
+      </a>
     </div>
-    
+      
+    </div>
+    <div class="row mx-auto">
+      <div class="col-sm-2 zoom"> 
+        <a onclick="getbrand('kenda');" href="#kenda">
+        <img src="{% static 'images/banners/KENDA.jpg'  %}"  alt="..." class="img-thumbnail rounded mx-auto d-block">
+      </a>
+      </div>
+      <div class="col-sm-2 zoom"> 
+        <a onclick="getbrand('westlake');" href="#westlake">
+        <img src="{% static 'images/banners/WEST.jpg'  %}"  alt="..." class="img-thumbnail rounded mx-auto d-block">
+      </a>
+    </div>
+      <div class="col-sm-2 zoom"> 
+        <a onclick="getbrand('cooper');" href="#cooper">
+        <img src="{% static 'images/banners/COOPER.jpg'  %}"   alt="..." class="img-thumbnail rounded mx-auto d-block">
+      </a>
+     </div>
+      
+      <div class="row mx-auto">
+        <div class="col-sm-2 zoom"> 
+          <a onclick="getbrand('jk');" href="#jk">
+          <img src="{% static 'images/banners/JK.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
+        </a>
+       </div>
+        <div class="col-sm-2 zoom"> 
+          <a onclick="getbrand('ceat');" href="#ceat">
+          <img src="{% static 'images/banners/CEAT.jpg'  %}" alt="..." class="img-thumbnail rounded mx-auto d-block">
+        </a>
+       </div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+  <div class="brandhis" id="nankang">
+    NAN
+  </div>
+  
+  <div class="brandhis" id="aplus">
+    APLU
+  </div>
+  
+  <div class="brandhis" id="sonar">
+    SON
+  </div>
+  
+  <div class="brandhis" id="kenda">
+    KEN
+  </div>
+  
+
+  
 </section>
 <!-- ========================= SECTION MAIN END// ========================= -->
- 
+<script>
+
+  
+  $(".brandhis").hide();
+  function getbrand(brand) {
+    
+    $(".brandhis").hide();
+    var x = document.getElementById(brand);
+    x.style.display = "block";
+
+  }
+
+</script>
 <!-- ========================= SECTION  END// ========================= -->
 {% endblock %}
 
