@@ -155,3 +155,69 @@ a:hover, a:focus {
 	  .zoom:hover {
 		transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 	  }
+
+	  .brandimgs {
+		padding-bottom: 30px;
+	  }
+
+
+	  
+	  .double_line_title::before {
+		content: "";
+		position: absolute;
+		top: 4px;
+		left: 18px;
+		width: 3px;
+		height: 24px;
+		transform: rotate(25deg);
+		background-color: #E60012;
+	}
+
+	.double_line_title::after {
+		content: "";
+		position: absolute;
+		top: 4px;
+		left: 8px;
+		width: 3px;
+		height: 24px;
+		transform: rotate(25deg);
+		background-color: #E60012;
+	}
+
+	.double_line_title {
+		padding-left: 36px;
+		position: relative;
+	}
+
+	.single_line_title::after {
+		content: "";
+		position: absolute;
+		top: 0px;
+		left: 8px;
+		width: 3px;
+		height: 18px;
+		transform: rotate(25deg);
+		background-color: #E60012;
+	}
+	.single_line_title {
+		padding-left: 24px;
+		position: relative;
+	}
+
+	.product-name {
+		display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+		height: 50px; 
+		min-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+	}
+
+	.img-wrap {
+		padding-top: 20px;
+	}
+
+	.img-big-wrap, .mainImage {
+		padding-top: 20px;
+	}

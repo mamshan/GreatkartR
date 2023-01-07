@@ -84,7 +84,7 @@ def product_detail(request, category_slug,  product_slug, brand):
         orderproduct = None  
 
     try:
-        relastedprod = Product.objects.filter(width__icontains=single_product.width, height__icontains=single_product.height, diameter__icontains=single_product.diameter).exclude(id=single_product.id)
+        relastedprod = Product.objects.filter(width__icontains=single_product.width, height__icontains=single_product.height, diameter__icontains=single_product.diameter,is_available=True).exclude(id=single_product.id)
     except OrderProduct.DoesNotExist:
         relastedprod = None
 
@@ -111,7 +111,7 @@ def search(request):
         profile = request.GET.get('profile')
         diameter = request.GET.get('diameter')
 
-        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter)
+        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
         product_count = products.count()
 
     context = {
@@ -146,7 +146,7 @@ def search(request):
 
         view = request.GET.get('view1')
 
-        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter)
+        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
         product_count = products.count()
 
 

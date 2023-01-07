@@ -100,7 +100,7 @@
 <div class="row">
 	{% if products %}
     {% for product in products %}
-	<div class="col-md-4">
+	<div class="col-md-3">
 		<figure class="card card-product-grid">
 			<div class="img-wrap"> 
 				
@@ -114,22 +114,26 @@
 			</div> <!-- img-wrap.// -->
 			<figcaption class="info-wrap">
 				<div class="fix-height">
-					<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+					 
+					<div class="product-name">
+						<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
+						</div>
+
 					<div class="price-wrap mt-2">
 						{% if product.discount > 0 %}
 						
-						<span class="price-old">{{ product.price }}</span>
-						
-						<span class="price">{{ product.get_selling }}</span>
+						<span class="price-old">Rs. {{ product.price }}</span>
+						 
+						<span class="price">Rs. {{ product.get_selling }}</span>
 						{% else %}
-						<span class="price">{{ product.price }}</span>
+						<span class="price">Rs. {{ product.price }}</span>
 						{% endif %}
 
 
 
 					</div> <!-- price-wrap.// -->
 				</div>
-				<a href="{% url 'add_cart' product.id %}" class="btn btn-block btn-primary">Add to cart </a>
+				
 			</figcaption>
 		</figure>
 	</div> <!-- col.// -->

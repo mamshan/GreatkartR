@@ -6,26 +6,29 @@
     <div class="topbar">
         <div class="container d-flex justify-content-between">
             <div class="p-2 ">
-                <a data-toggle="modal" data-target="#myModal2" href="#" class="link-dark">  <i class="fa fa-solid fa-phone"></i> &nbsp;  Customer Support +94 Testing </a> &nbsp;&nbsp;&nbsp;&nbsp;  
+                <a data-bs-toggle="modal" data-bs-target="#myModal2" href="#" class="link-dark">  <i class="fa fa-solid fa-phone"></i> &nbsp;  Customer Support +94 Testing </a> &nbsp;&nbsp;&nbsp;&nbsp;  
                  <i class="fa fa-solid fa-envelope"></i>  &nbsp; Email :  sales@besttyre.lk  
             </div>
             
             <div class=" p-2 ">
                 <a href="https://www.facebook.com/besttyre.lk"><i class="fab fa-brands fa-facebook"></i></a>  &nbsp; &nbsp;
             <a href="https://www.instagram.com/besttyre">  <i class="fab fa-brands fa-instagram"></i></a>  &nbsp; &nbsp;
-              <a href="#" class="link-dark" data-toggle="modal" data-target="#myModal2">  <i class="fa fa-solid fa-phone"></i></a>  
+              <a href="#" class="link-dark" data-bs-toggle="modal" data-bs-target="#myModal2">  <i class="fa fa-solid fa-phone"></i></a>  
             </div>
         </div>
     </div>
 
     <section class="header-main border-bottom">
+
     <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}"> <img class="logo" src="{% static './images/logo.png' %}"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
+
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+          <ul class="navbar-nav d-flex justify-content-center me-auto mb-2 mb-lg-0 ">
 
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
@@ -47,10 +50,10 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#"><div class="col-sm-5"></div></a>
               </li>
+            </ul>
+           
 
-            <li class="nav-item active">
-
-                <div class="d-flex justify-content-end">
+                <div class="d-flex">
                     {% if user.id is None %}
                     <div class="widget-header">
                         <small class="title text-muted">Welcome guest!</small>
@@ -74,11 +77,12 @@
                     </a>
                 </div> <!-- widgets-wrap.// -->
 
-            </li>
+             
 
 
-          </ul>
+          
         </div>
+      </div>
       </nav>
     </section> <!-- header-main .// -->
 
