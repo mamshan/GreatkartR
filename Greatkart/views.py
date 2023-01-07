@@ -7,11 +7,11 @@ def home(request):
 
  
    
-    width = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
-    height = Product.objects.values('height').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
-    diameter = Product.objects.values('diameter').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
+    width = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('width') 
+    height = Product.objects.values('height').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('height') 
+    diameter = Product.objects.values('diameter').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('diameter') 
 
- 
+  
 
     products = Product.objects.all().filter(width__exact='235',is_available=True)
     context = {
