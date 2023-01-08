@@ -2,6 +2,9 @@ from django.shortcuts import render
 
 from store.models import Product
 from django.db.models import Sum, Count
+from django.http import JsonResponse
+from django.conf import settings
+from django.core.mail import send_mail
 
 def home(request):
 
@@ -41,3 +44,14 @@ def brands(request):
 
 def faq(request):
     return render(request, 'home/faq.html')
+
+def contactus(request):
+
+
+    subject = "Inquiry"
+    message = "Inquiry from " + str(request.GET.get('name')) + " / " + str(request.GET.get('phone'))  +  " about " + str(request.GET.get('inqu')) 
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ["shano1106@gmail.com", ]
+    send_mail( subject, message, email_from, recipient_list )
+
+    return JsonResponse({"status": 1 }, status=200)

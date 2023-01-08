@@ -22,38 +22,37 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}"> <img class="logo" src="{% static './images/logo.png' %}"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="{% url 'home' %}"> <img class="logo " src="{% static './images/logo.png' %}"></a>
+
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
-          <ul class="navbar-nav d-flex justify-content-center me-auto mb-2 mb-lg-0 ">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
 
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+            <li class="nav-item active px-3">
+              <a class="nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             {% for category in links %}
 
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ category.get_url }}">  {{ category.category_name  }}</a>
+            <li class="nav-item px-3">
+                <a class="nav-link active" href="{{ category.get_url }}">  {{ category.category_name  }}</a>
               </li>
  
             {% endfor %}
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'brands' %}">Our Brands</a>
+            <li class="nav-item  px-3">
+              <a class="nav-link active" href="{% url 'brands' %}">Our Brands</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'faq' %}">FAQ</a>
+            <li class="nav-item  px-3">
+              <a class="nav-link active" href="{% url 'faq' %}">FAQ</a>
             </li>
              
-            <li class="nav-item active">
-                <a class="nav-link" href="#"><div class="col-sm-5"></div></a>
-              </li>
+             
             </ul>
            
 
-                <div class="d-flex">
+                <div class="">
                     {% if user.id is None %}
                     <div class="widget-header">
                         <small class="title text-muted">Welcome guest!</small>
@@ -71,7 +70,7 @@
                         </div>
                     </div>
                     {% endif %}
-                    <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+                    <a href="{% url 'cart' %}" class="widget-header ps-2 ms-2 me-2">
                         <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
                         <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
                     </a>

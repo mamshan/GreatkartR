@@ -28,11 +28,11 @@
 	<div class="card-body">
 		<form action="{% url 'search_size' %}" method="GET" class="search">
 			
-			<div class="form-group row">
+			<div class="row mb-3">
 				
-				<label class="col-sm-4" for="width">Width</label>
+				<label class="col col-sm-4 col-form-label " for="width">Width</label>
 				<div class="col-sm-6"> 
-					<select class="form-control" onclick="getsizes('width');" id="width"name="width">
+					<select class="form-select" onclick="getsizes('width');" id="width"name="width">
 						
 						<option>Width</option>
 						{% for width in width %}
@@ -46,10 +46,10 @@
 				</div>
 			</div>
 			
-			<div class="form-group row">
-				<label class="col-sm-4" for="profile">Profile</label>
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label" for="profile">Profile</label>
 				<div class="col-sm-6"> 
-					<select class="form-control" onclick="getsizes('profile');" id="profile"name="profile">
+					<select class="form-select" onclick="getsizes('profile');" id="profile"name="profile">
 						
 						<option>Profile</option>
 						<option selected>{{ sprofile }}</option>
@@ -57,18 +57,26 @@
 					</select>
 				</div>
 			</div>
-			<div class="form-group row">
-				<label class="col-sm-4" for="diameter">Rim Size</label>
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label" for="diameter">Rim Size</label>
 				<div class="col-sm-6"> 
-					<select class="form-control"  id="diameter"name="diameter">
+					<select class="form-select"   onclick="getsizes('rim');"  id="diameter"name="diameter">
 						
 						<option>Rim Size</option>
 						<option selected>{{ sdiameter }}</option>
 						
 					</select>
 				</div>
-				
-				
+			</div>
+
+
+			<div class="row mb-3">
+				<label class="col-sm-4 col-form-label" for="terrain">Terrain</label>
+				<div class="col-sm-6"> 
+					<select class="form-select" id="terrain"name="terrain">
+						<option selected>{{ sterrain }}</option>
+					</select>
+				</div>
 			</div>
 			
 			<input type="hidden" id="view1"  name="view1" value="view2">
@@ -214,7 +222,8 @@
 <!-- ========================= SECTION CONTENT END// ========================= -->
 <script>
  
-	
+	 
+
 	function getsizes(cmbselect) {
 		
 		
@@ -232,7 +241,9 @@
 		if (cmbselect == "profile") {
 			var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value;
 		}
-		
+		if (cmbselect == "rim") {
+			var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value+ "&rim="+ document.getElementById("diameter").value;
+		}
 		
 		
 		$.ajax({
@@ -265,7 +276,16 @@
 						i = i +1;
 					}); 
 				}
-				
+				if (cmbselect == "rim") {
+					var mySelect = document.getElementById('terrain');
+					mySelect.options.length = 0;
+					mySelect.options[0] = new Option ("Any", "Any");
+					i = 1;
+					response.width.forEach(function (item) { 
+						mySelect.options[i] = new Option (item.terrain, item.terrain);
+						i = i +1;
+					}); 
+				}
 				
 			},
 			error: function (response) {
@@ -281,15 +301,6 @@
 	
 </script>
 <!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top padding-y">
-	<div class="container">
-		<p class="float-md-right"> 
-			&copy Copyright 2019 All rights reserved
-		</p>
-		<p>
-			<a href="#">Terms and conditions</a>
-		</p>
-	</div><!-- //container -->
-</footer>
+
 <!-- ========================= FOOTER END // ========================= -->
 {% endblock %}

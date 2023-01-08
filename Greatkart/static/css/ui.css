@@ -1581,3 +1581,8 @@ div {
     background-color: rgba(50,50,50,.9);
 }
 }
+
+
+.accordion-button {
+  background-color: white !important;;
+}

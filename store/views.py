@@ -16,15 +16,18 @@ def store(request, category_slug=None, brand=None):
         categories = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.all().filter(category=categories, is_available=True).order_by('-price') 
         brands = Product.objects.values('brand').filter(category=categories, is_available=True).annotate(Count('id'))
-
+        width = Product.objects.values('width').filter(category=categories, is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('width') 
+    
         if brand is not None:
             products = Product.objects.all().filter(category=categories,brand=brand, is_available=True).order_by('-price') 
             brands = Product.objects.values('brand').filter(category=categories, brand=brand,is_available=True).annotate(Count('id'))
-
+            width = Product.objects.values('width').filter(category=categories,brand=brand, is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('width') 
+    
     else:
         products = Product.objects.all().filter(is_available=True).order_by('-price')  
         brands = Product.objects.values('brand').filter(is_available=True).annotate(Count('id'))
-
+        width = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('width') 
+    
         if brand is not None:
             products = Product.objects.all().filter(brand=brand, is_available=True).order_by('-price') 
             brands = Product.objects.values('brand').filter(brand=brand,is_available=True).annotate(Count('id'))
@@ -39,6 +42,7 @@ def store(request, category_slug=None, brand=None):
     context = {
         'products': paged_products,
         'product_count': product_count,
+        'width':width,
         'brands': brands
     }
     return render(request, 'store/store.html', context=context)
@@ -133,7 +137,12 @@ def get_sizes(request):
         profile = request.GET.get('profile')  
         width = Product.objects.values('diameter').filter(width__icontains=width,height__icontains=profile,is_available=True).exclude(width__exact='').annotate(Count('id'))
         product_count = width.count()    
-        
+    if 'rim' in request.GET:
+        width = request.GET.get('width') 
+        profile = request.GET.get('profile') 
+        rim = request.GET.get('rim')  
+        width = Product.objects.values('terrain').filter(width__icontains=width,height__icontains=profile,diameter__icontains=rim,is_available=True).exclude(terrain__exact='').annotate(Count('id'))
+        product_count = width.count()        
 
     return JsonResponse({"width": list(width), "product_count": product_count }, status=200)
 
@@ -143,12 +152,17 @@ def search(request):
         width = request.GET.get('width')
         profile = request.GET.get('profile')
         diameter = request.GET.get('diameter')
+        terrain = request.GET.get('terrain')
+
 
         view = request.GET.get('view1')
 
-        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
-        product_count = products.count()
-
+        if request.GET.get('terrain') =="Any":
+            products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
+            product_count = products.count()
+        else:
+            products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter, terrain__icontains=terrain,is_available=True)
+            product_count = products.count()
 
     widths = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
    
@@ -162,6 +176,7 @@ def search(request):
         'swidth': width,
         'sprofile': profile,
         'sdiameter': diameter,
+        'sterrain': terrain,
         
     }
 

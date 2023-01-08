@@ -52,8 +52,9 @@ $(document).ready(function() {
 	} // end if
 
 
-    $('.carousel').carousel({
-        interval: 2000
+    const myCarouselElement = document.querySelector('.carousel')
+      const carousel = new bootstrap.Carousel(myCarouselElement, {
+        interval: 2000, 
       })
 }); 
 // jquery end

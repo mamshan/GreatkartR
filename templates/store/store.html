@@ -23,58 +23,79 @@
 <div class="row">
 	<aside class="col-md-3">
 		
+		{% if '/store/category/batteries/' != request.path %}
 <div class="card">
-	<article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Categories</h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse_1" style="">
+	 
 			<div class="card-body">
 				
-				<ul class="list-menu"> 
-				{% for category in links %}	
-				<li><a href="{{ category.get_url }}"> {{ category.category_name  }}</a></li>
-					 
-
-				{% endfor %} 
-				 
-				</ul>
-
-			</div> <!-- card-body.// -->
-		</div>
-
-		 
-
-
-
-	</article> <!-- filter-group  .// -->
-	<article class="filter-group">
-		<header class="card-header">
-			<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-				<i class="icon-control fa fa-chevron-down"></i>
-				<h6 class="title">Brands</h6>
-			</a>
-		</header>
-		<div class="filter-content collapse show" id="collapse_4" style="">
-			<div class="card-body">
-				{% for brand in brands %}	
-			  <label class="checkbox-btn">
-			    <input type="checkbox">
-			    <span class="btn btn-light"> {{ brand.brand }} </span>
-			  </label>
-			  {% endfor %} 
-			  
-		</div><!-- card-body.// -->
-		</div>
-	</article> <!-- filter-group .// -->
+				<form action="{% url 'search_size' %}" method="GET" class="search">
+			
+					<div class="row mb-3">
+						
+						<label class="col col-sm-4 col-form-label " for="width">Width</label>
+						<div class="col-sm-6"> 
+							<select class="form-select" onclick="getsizes('width');" id="width"name="width">
+								
+								<option>Width</option>
+								{% for width in width %}
+								{% if width.width == swidth %}
+								<option selected>{{ width.width }}</option>
+								{% else %}
+								<option>{{ width.width }}</option>
+								{% endif %}
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label" for="profile">Profile</label>
+						<div class="col-sm-6"> 
+							<select class="form-select" onclick="getsizes('profile');" id="profile"name="profile">
+								
+								<option>Profile</option>
+								<option selected>{{ sprofile }}</option>
+											 
+							</select>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label" for="diameter">Rim Size</label>
+						<div class="col-sm-6"> 
+							<select class="form-select"   onclick="getsizes('rim');"  id="diameter"name="diameter">
+								
+								<option>Rim Size</option>
+								<option selected>{{ sdiameter }}</option>
+								
+							</select>
+						</div>
+					</div>
+		
+		
+					<div class="row mb-3">
+						<label class="col-sm-4 col-form-label" for="terrain">Terrain</label>
+						<div class="col-sm-6"> 
+							<select class="form-select" id="terrain"name="terrain">
+								<option selected>{{ sterrain }}</option>
+							</select>
+						</div>
+					</div>
+					
+					<input type="hidden" id="view1"  name="view1" value="view2">
+					
+					<button class="btn btn-primary" type="submit">
+						Filter
+						<i class="fa fa-search"></i>
+					</button>
+					
+				</form> 
+			
+		</div><!-- card-body.// --> 
 	
 
 	
 </div> <!-- card.// -->
-
+{% endif %}
 	</aside> <!-- col.// -->
 	<main class="col-md-9">
 
@@ -195,16 +216,88 @@
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
+<script>
+ 
+	 
+
+	function getsizes(cmbselect) {
+		
+		
+		// preventing from page reload and default actions
+		
+		// serialize the data for sending the form data.
+		var serializedData = $(this).serialize();
+		// make POST ajax call
+		
+		var data = new FormData();
+		
+		if (cmbselect == "width") {
+			var dataString = "width="+ document.getElementById("width").value;
+		}
+		if (cmbselect == "profile") {
+			var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value;
+		}
+		if (cmbselect == "rim") {
+			var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value+ "&rim="+ document.getElementById("diameter").value;
+		}
+		
+		
+		$.ajax({
+			type: 'GET',
+			url: "{% url 'get_sizes' %}",
+			data: dataString,
+			success: function (response) {
+				if (cmbselect == "width") {
+					var mySelect = document.getElementById('profile');
+					mySelect.options.length = 0;
+					mySelect.options[0] = new Option ("Profile", "Profile");
+					i = 1;
+					response.width.forEach(function (item) { 
+						mySelect.options[i] = new Option (item.height, item.height);
+						i = i +1;
+					}); 
+					var mySelect = document.getElementById('diameter');
+					mySelect.options.length = 0;
+					mySelect.options[0] = new Option ("Rim Size", "Rim Size");
+					
+				}
+				
+				if (cmbselect == "profile") {
+					var mySelect = document.getElementById('diameter');
+					mySelect.options.length = 0;
+					mySelect.options[0] = new Option ("Rim Size", "Rim Size");
+					i = 1;
+					response.width.forEach(function (item) { 
+						mySelect.options[i] = new Option (item.diameter, item.diameter);
+						i = i +1;
+					}); 
+				}
+				if (cmbselect == "rim") {
+					var mySelect = document.getElementById('terrain');
+					mySelect.options.length = 0;
+					mySelect.options[0] = new Option ("Any", "Any");
+					i = 1;
+					response.width.forEach(function (item) { 
+						mySelect.options[i] = new Option (item.terrain, item.terrain);
+						i = i +1;
+					}); 
+				}
+				
+			},
+			error: function (response) {
+				// alert the error if any error occured
+				alert(response["responseJSON"]["error"]);
+			}
+		})
+	}
+	
+	
+	
+	
+	
+</script>
+
 <!-- ========================= FOOTER ========================= -->
-<footer class="section-footer border-top padding-y">
-	<div class="container">
-		<p class="float-md-right"> 
-			&copy Copyright 2019 All rights reserved
-		</p>
-		<p>
-			<a href="#">Terms and conditions</a>
-		</p>
-	</div><!-- //container -->
-</footer>
+
 <!-- ========================= FOOTER END // ========================= -->
 {% endblock %}

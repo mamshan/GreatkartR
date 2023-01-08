@@ -14,18 +14,18 @@
           {% include "includes/alerts.html" %}
             <form action="{% url 'login' %}" method="POST">
               {% csrf_token %}
-              <div class="form-group">
+              <div class="row mb-3 px-3">
                  <input type="email" class="form-control" name="email" placeholder="Email Address" >
               </div> <!-- form-group// -->
-              <div class="form-group">
+              <div class="row mb-3 px-3">
                 <input type="password" class="form-control" name="password"  placeholder="Password" >
               </div> <!-- form-group// -->
               
-              <div class="form-group">
+              <div class="row mb-3 px-3">
                   <a href="{% url 'forgotPassword' %}" class="float-right">Forgot password?</a> 
                
               </div> <!-- form-group form-check .// -->
-              <div class="form-group">
+              <div class="row mb-3 px-3">
                   <button type="submit" class="btn btn-primary btn-block"> Login  </button>
               </div> <!-- form-group// -->    
           </form>

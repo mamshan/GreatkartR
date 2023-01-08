@@ -1573,3 +1573,7 @@ a[class*=card]:hover .title {
     background-color: rgba(50,50,50,.9);
     box-sizing: border-box;
 }
+
+.accordion-button {
+  background-color: white !important;;
+}

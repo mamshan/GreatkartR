@@ -17,17 +17,18 @@
             {{ form.non_field_errors }}
             <form action="{% url 'register' %}" method="POST">
                 {% csrf_token %}
-                <div class="form-row">
-                    <div class="col form-group">
+                <div class="row mb-3">
+                    <div class="col ">
                         <label>First name</label>
                         {{ form.first_name }}
                     </div> <!-- form-group end.// -->
-                    <div class="col form-group">
+                    <div class="col">
                         <label>Last name</label>
                         {{ form.last_name }}
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row end.// -->
-                <div class="form-row">
+
+                <div class="row mb-3">
                     <div class="form-group col-md-6">
                         <label>Email</label>
                         {{ form.email }}
@@ -38,7 +39,7 @@
                         {{ form.phone_number }}
                     </div> <!-- form-group end.// -->
                 </div> <!-- form-row.// -->
-                <div class="form-row">
+                <div class="row mb-3">
                     <div class="form-group col-md-6">
                         <label>Create password</label>
                         {{ form.password }}
@@ -48,7 +49,7 @@
                         {{ form.confirm_password }}
                     </div> <!-- form-group end.// -->
                 </div>
-                <div class="form-group">
+                <div class="row mb-3 px-3">
                     <button type="submit" class="btn btn-primary btn-block"> Register </button>
                 </div> <!-- form-group// -->
                

@@ -54,9 +54,9 @@
                         
                         <div class="row mb-3">
                             
-                            <label class="col col-sm-2 col-form-label " for="width">Width</label>
+                            <label class="col col-sm-3 col-form-label " for="width">Width</label>
                             <div class="col col-sm-5"> 
-                                <select class="form-select" onclick="getsizes('width');" id="width"name="width">
+                                <select class="form-select"  required onclick="getsizes('width');" id="width"name="width">
                                     <option>Width</option>
                                     {% for width in width %}
                                     <option>{{ width.width }}</option>
@@ -67,9 +67,9 @@
                         </div>
                         
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="profile">Profile</label>
+                            <label class="col-sm-3 col-form-label" for="profile">Profile</label>
                             <div class="col-sm-5"> 
-                                <select class="form-select" onclick="getsizes('profile');" id="profile"name="profile">
+                                <select class="form-select" required onclick="getsizes('profile');" id="profile"name="profile">
                                     
                                     <option>Profile</option>
                                     
@@ -77,9 +77,9 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="diameter">Rim Size</label>
+                            <label class="col-sm-3 col-form-label" for="diameter">Rim Size</label>
                             <div class="col-sm-5"> 
-                                <select class="form-select"    id="diameter"name="diameter">
+                                <select class="form-select"  required onclick="getsizes('rim');"   id="diameter"name="diameter">
                                     
                                     <option>Rim Size</option>
                                     
@@ -95,10 +95,10 @@
                         </div>
                         
                         <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label" for="terrain">Terrain</label>
+                            <label class="col-sm-3 col-form-label" for="terrain">Terrain</label>
                             <div class="col-sm-5"> 
                                 <select class="form-select" id="terrain"name="terrain">
-                                    <option>Terrain</option>
+                                    <option value="Any">Any</option>
                                 </select>
                             </div>
                         </div>
@@ -181,7 +181,9 @@
             if (cmbselect == "profile") {
                 var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value;
             }
-            
+            if (cmbselect == "rim") {
+                var dataString = "width="+ document.getElementById("width").value + "&profile="+ document.getElementById("profile").value+ "&rim="+ document.getElementById("diameter").value;
+            }
             
             
             $.ajax({
@@ -211,6 +213,16 @@
                         i = 1;
                         response.width.forEach(function (item) { 
                             mySelect.options[i] = new Option (item.diameter, item.diameter);
+                            i = i +1;
+                        }); 
+                    }
+                    if (cmbselect == "rim") {
+                        var mySelect = document.getElementById('terrain');
+                        mySelect.options.length = 0;
+                        mySelect.options[0] = new Option ("Any", "Any");
+                        i = 1;
+                        response.width.forEach(function (item) { 
+                            mySelect.options[i] = new Option (item.terrain, item.terrain);
                             i = i +1;
                         }); 
                     }

@@ -1,16 +1,18 @@
+{% load static %}
 <!-- Modal -->
-<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Left Sidebar</h4>
+                 
+                <h4 class="modal-title" id="myModalLabel"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
             </div>
 
             <div class="modal-body">
-                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </p>
+                <img class="d-flex mx-auto" src="{% static 'images/icons/success.svg'  %}">
+                <div class="mt-5 d-flex mx-auto justify-content-center">Thank you for contacting us. </div> <div  class="d-flex mx-auto justify-content-center"> We will be in Touch with you shortly.</div>
             </div>
 
         </div><!-- modal-content -->
@@ -34,22 +36,34 @@
                 
                 <form>
 
-                    <div class="col form-group">
-                        <label for="">Name</label>
-                        <input type="text" name="name" class="form-control" required>
-                    </div>
-                    <div class="col form-group">
-                        <label for="">Phone Number</label>
-                        <input type="text" name="phone" class="form-control" required>
+                    <div id="progress" class="col  mb-3">
+                         
                     </div>
 
-                    <div class="col form-group">
-                        <label for="">Vehical Model / Tyre Size</label>
-                        <textarea type="text" name="descriptions" class="form-control" required></textarea>
+                    <div class="col  mb-3">
+                        <label for="name" class="col-form-label">Name</label>
+                        <input type="text" name="name" id="name" class="form-control" required>
+                    </div>
+                    <div class="col  mb-3">
+                        <label for="phone" class="col-form-label">Phone Number</label>
+                        <input type="number" name="phone" id="phone" class="form-control" required>
                     </div>
 
-                    <div class="col form-group">
-                        <button class="btn btn-primary">Submit</button>
+                    <div class="col  mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" onclick="lockdesc();" type="checkbox" value="" name="currentpg" id="currentpg">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              Product on Current Page
+                            </label>
+                          </div>
+
+                        <label for="descriptions" class="col-form-label">Vehical Model / Tyre Size</label>
+                        <textarea type="text" id="descriptions" name="descriptions"  class="form-control" required></textarea>
+                    </div>
+                    <input type="hidden" id="page" name="page" >
+
+                    <div class="col  mb-3">
+                        <a onclick="sendme();" class="btn btn-primary">Submit</a>
                     </div>
 
 
@@ -59,3 +73,80 @@
         </div><!-- modal-content -->
     </div><!-- modal-dialog -->
 </div><!-- modal -->
+
+<script>
+
+    document.getElementById("page").innerHTML = window.location.href;
+
+    function lockdesc() {
+        if (document.getElementById("currentpg").checked == true){ 
+            document.getElementById("descriptions").innerHTML = window.location.href;
+
+        } else { 
+            document.getElementById("descriptions").innerHTML ="";
+
+        }
+    }
+
+
+    function lockdesc() {
+        if (document.getElementById("currentpg").checked == true){ 
+            document.getElementById("descriptions").innerHTML = window.location.href;
+
+        } else { 
+            document.getElementById("descriptions").innerHTML ="";
+
+        }
+    }
+
+    function sendme() {
+       
+
+          // preventing from page reload and default actions
+            
+            // serialize the data for sending the form data.
+            var serializedData = $(this).serialize();
+            // make POST ajax call
+            
+            var data = new FormData();
+            
+            
+            data.append( 'name', document.getElementById("name").value );
+            data.append( 'phone', document.getElementById("phone").value  );
+            data.append( 'inqu', document.getElementById("descriptions").value  );
+            
+            var dataString = "name="+ document.getElementById("name").value + "&phone="+ document.getElementById("phone").value+ "&inqu="+ document.getElementById("descriptions").value;
+
+            document.getElementById("progress").innerHTML ='<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'contactus' %}",
+                processData: false,
+                contentType: false,
+                data: dataString,
+                success: function (response) {
+                    
+
+                    document.getElementById("progress").innerHTML ="";
+                    $('#myModal2').modal('hide');
+                    document.getElementById("name").value="";
+                    document.getElementById("phone").value="";
+                    document.getElementById("descriptions").value="";
+                    
+                    $('#myModal').modal('show');
+                
+                    
+                },
+                error: function (response) {
+                    // alert the error if any error occured
+                    document.getElementById("progress").innerHTML ="";
+                    alert(response["responseJSON"]["error"]);
+                }
+            })
+
+       
+    }
+
+
+</script>

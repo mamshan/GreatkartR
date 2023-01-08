@@ -88,7 +88,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
                  
                 total += cart_item.price * cart_item.quantity
                 quantity += cart_item.quantity
-        tax = total * 2 / 100
+        tax = 0
         grand_total = total + tax
     except ObjectDoesNotExist:
         pass  
@@ -155,7 +155,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         for cart_item in cart_items:
             total += cart_item.price * cart_item.quantity
             quantity += cart_item.quantity
-        tax = total * 2 / 100
+        tax = 0
         grand_total = total + tax
     except ObjectDoesNotExist:
         pass    # Chỉ bỏ qua
