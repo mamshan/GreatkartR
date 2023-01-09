@@ -63,9 +63,7 @@ ul.thumb li img {
 	.navbar .nav-item .dropdown-menu{ margin-top:0; }
 }	
 
- 
-
-  a {
+a {
     color: black;
     text-decoration: none;
 }
@@ -128,7 +126,27 @@ a:hover, a:focus {
 		right: 0;
 	}
 
- 
+	.onsale.sale-left {
+		left: 10px;
+	}
+
+	.onsale {
+		color: #ffffff;
+		background-color: #1346af;
+		border-radius: 0px;
+	}
+
+	.onsale {
+		position: absolute;
+		top: 10px;
+		pointer-events: none;
+		padding: 5px;
+		font-size: 12px;
+		z-index: 2;
+		line-height: 1;
+		direction: ltr;
+	}
+
 	.zoom {  
 		transition: transform .2s; /* Animation */ 
 		margin: 0 auto;
@@ -142,6 +160,8 @@ a:hover, a:focus {
 		padding-bottom: 30px;
 	  }
 
+
+	  
 	  .double_line_title::before {
 		content: "";
 		position: absolute;
@@ -179,7 +199,6 @@ a:hover, a:focus {
 		transform: rotate(25deg);
 		background-color: #E60012;
 	}
-
 	.single_line_title {
 		padding-left: 24px;
 		position: relative;

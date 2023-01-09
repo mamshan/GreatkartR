@@ -6,148 +6,217 @@
 
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
-<div class="container">
-	{% if 'search' in request.path %}
-	<h2 class="title-page">Search Results</h2>
-	{% else %}
-	<h2 class="title-page">Our Store</h2>
-	{% endif %}
-</div> <!-- container //  -->
+	<div class="container">
+		{% if 'search' in request.path %}
+		<h4 class="title-page">Search Results</h4>
+		{% else %}
+		<h4 class="title-page">Our Store</h4>
+		{% endif %}
+	</div> <!-- container //  -->
 </section>
 <!-- ========================= SECTION INTRO END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
-<div class="container">
-
-<div class="row">
-	<aside class="col-md-3">
+<section class="section-content p-2">
+	<div class="container">
 		
-		{% if '/store/category/batteries/' != request.path %}
-<div class="card">
-	 
-			<div class="card-body">
+		<div class="row">
+			<aside class="col-md-3">
 				
-				<form action="{% url 'search_size' %}" method="GET" class="search">
-			
-					<div class="row mb-3">
+				{% if '/store/category/batteries/' != request.path %}
+				<div class="card">
+					
+					<div class="card-body">
 						
-						<label class="col col-sm-4 col-form-label " for="width">Width</label>
-						<div class="col-sm-6"> 
-							<select class="form-select" onclick="getsizes('width');" id="width"name="width">
+						<form action="{% url 'search_size' %}" method="GET" class="search">
+							
+							<div class="row mb-3">
 								
-								<option>Width</option>
-								{% for width in width %}
-								{% if width.width == swidth %}
-								<option selected>{{ width.width }}</option>
-								{% else %}
-								<option>{{ width.width }}</option>
-								{% endif %}
-								{% endfor %}
-							</select>
-						</div>
-					</div>
+								<label class="col col-sm-4 col-form-label " for="width">Width</label>
+								<div class="col-sm-6"> 
+									<select class="form-select" onclick="getsizes('width');" id="width"name="width">
+										
+										<option>Width</option>
+										{% for width in width %}
+										{% if width.width == swidth %}
+										<option selected>{{ width.width }}</option>
+										{% else %}
+										<option>{{ width.width }}</option>
+										{% endif %}
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							
+							<div class="row mb-3">
+								<label class="col-sm-4 col-form-label" for="profile">Profile</label>
+								<div class="col-sm-6"> 
+									<select class="form-select" onclick="getsizes('profile');" id="profile"name="profile">
+										
+										<option>Profile</option>
+										<option selected>{{ sprofile }}</option>
+										
+									</select>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label class="col-sm-4 col-form-label" for="diameter">Rim Size</label>
+								<div class="col-sm-6"> 
+									<select class="form-select"   onclick="getsizes('rim');"  id="diameter"name="diameter">
+										
+										<option>Rim Size</option>
+										<option selected>{{ sdiameter }}</option>
+										
+									</select>
+								</div>
+							</div>
+							
+							
+							<div class="row mb-3">
+								<label class="col-sm-4 col-form-label" for="terrain">Terrain</label>
+								<div class="col-sm-6"> 
+									<select class="form-select" id="terrain"name="terrain">
+										<option selected>{{ sterrain }}</option>
+									</select>
+								</div>
+							</div>
+							
+							<input type="hidden" id="view1"  name="view1" value="view2">
+							
+							<button class="btn btn-primary" type="submit">
+								Filter
+								<i class="fa fa-search"></i>
+							</button>
+							
+						</form> 
+						
+					</div><!-- card-body.// --> 
 					
-					<div class="row mb-3">
-						<label class="col-sm-4 col-form-label" for="profile">Profile</label>
-						<div class="col-sm-6"> 
-							<select class="form-select" onclick="getsizes('profile');" id="profile"name="profile">
+					
+					
+				</div> <!-- card.// -->
+				{% else %}
+				<div class="card">
+					
+					<div class="card-body">
+						
+						<form action="{% url 'search_size' %}" method="GET" class="search">
+							
+							<div class="row mb-3">
 								
-								<option>Profile</option>
-								<option selected>{{ sprofile }}</option>
-											 
-							</select>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<label class="col-sm-4 col-form-label" for="diameter">Rim Size</label>
-						<div class="col-sm-6"> 
-							<select class="form-select"   onclick="getsizes('rim');"  id="diameter"name="diameter">
-								
-								<option>Rim Size</option>
-								<option selected>{{ sdiameter }}</option>
-								
-							</select>
-						</div>
-					</div>
-		
-		
-					<div class="row mb-3">
-						<label class="col-sm-4 col-form-label" for="terrain">Terrain</label>
-						<div class="col-sm-6"> 
-							<select class="form-select" id="terrain"name="terrain">
-								<option selected>{{ sterrain }}</option>
-							</select>
-						</div>
-					</div>
-					
-					<input type="hidden" id="view1"  name="view1" value="view2">
-					
-					<button class="btn btn-primary" type="submit">
-						Filter
-						<i class="fa fa-search"></i>
-					</button>
-					
-				</form> 
-			
-		</div><!-- card-body.// --> 
-	
+								<label class="col col-sm-4 col-form-label " for="width">AH</label>
+								<div class="col-sm-6"> 
+									<select class="form-select" onclick="getsizes('AH');" id="ah"name="ah">
+										
+										<option>Any</option>
+										{% for ah in ah %}
+										{% if ah.ah == sah %}
+										<option selected>{{ ah.ah }}</option>
+										{% else %}
+										<option>{{ ah.ah }}</option>
+										{% endif %}
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							
+							 
+							
+							
+							<div class="row mb-3">
+								<label class="col-sm-4 col-form-label" for="terrain">Left / Right</label>
+								<div class="col-sm-6"> 
+									<select class="form-select" id="lr"name="lr">
 
-	
-</div> <!-- card.// -->
-{% endif %}
-	</aside> <!-- col.// -->
-	<main class="col-md-9">
+										{% if slr != None %}
+										{% if slr == "L" %}
+										<option value="L" selected>Left</option>
+										{% else %}
+										<option  value="R" selected>Right</option>
+										{% endif %}
+										{% else %}
 
-<header class="border-bottom mb-4 pb-3">
-		<div class="form-inline">
-			<span class="mr-md-auto">{{ product_count }} Items found </span>
-			
-		</div>
-</header><!-- sect-heading -->
+										<option>Any</option>
+										<option value="L">Left</option>
+										<option value="R">Right</option>
+										{% endif %}
+									</select>
+								</div>
+							</div>
+							
+							<input type="hidden" id="view1"  name="view1" value="view2">
+							
+							<button class="btn btn-primary" type="submit">
+								Filter
+								<i class="fa fa-search"></i>
+							</button>
+							
+						</form> 
+						
+					</div><!-- card-body.// --> 
+					
+					
+					
+				</div> <!-- card.// -->
 
-<div class="row">
-	{% if products %}
-    {% for product in products %}
-	<div class="col-md-3">
-		<figure class="card card-product-grid">
-			<div class="img-wrap"> 
-				{% if product.discount > 0 %}
-				<span class="tag-on-sale onsale sale-left">-{{ product.discount }}%</span>
+
+
+
+
+
 				{% endif %}
-
-				<img src="{{ product.images.url }}">
+			</aside> <!-- col.// -->
+			<main class="col-md-9">
 				
-			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
-				<div class="fix-height">
-					<div class="product-name">
-					<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
+				<header class="border-bottom mb-4 pb-3">
+					<div class="form-inline">
+						<span class="mr-md-auto">{{ product_count }} Items found </span>
+						
 					</div>
-					<div class="price-wrap mt-2">
-					
-						{% if product.discount > 0 %}
-						 
-						<span class="price-old">Rs. {{ product.price }}</span>
-						 
-						<span class="price">Rs. {{ product.get_selling }}</span>
-						{% else %}
-						<span class="price">Rs. {{ product.price }}</span>
-						{% endif %}
-					</div> <!-- price-wrap.// -->
-				</div>
+				</header><!-- sect-heading -->
 				
-			</figcaption>
-		</figure>
-	</div> <!-- col.// -->
-    {% endfor %}
-	{% else %}
-		<h2>No Results Found. Please try again</h2>
-	{% endif %}
-</div> <!-- row end.// -->
-
-
-{% if products %}
+				<div class="row">
+					{% if products %}
+					{% for product in products %}
+					<div class="col-md-3">
+						<figure class="card card-product-grid">
+							<div class="img-wrap"> 
+								{% if product.discount > 0 %}
+								<span class="tag-on-sale onsale sale-left">-{{ product.discount }}%</span>
+								{% endif %}
+								
+								<img src="{{ product.images.url }}">
+								
+							</div> <!-- img-wrap.// -->
+							<figcaption class="info-wrap">
+								<div class="fix-height">
+									<div class="product-name">
+										<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
+									</div>
+									<div class="price-wrap mt-2">
+										
+										{% if product.discount > 0 %}
+										
+										<span class="price-old">Rs. {{ product.price }}</span>
+										
+										<span class="price">Rs. {{ product.get_selling }}</span>
+										{% else %}
+										<span class="price">Rs. {{ product.price }}</span>
+										{% endif %}
+									</div> <!-- price-wrap.// -->
+								</div>
+								
+							</figcaption>
+						</figure>
+					</div> <!-- col.// -->
+					{% endfor %}
+					{% else %}
+					<h2>No Results Found. Please try again</h2>
+					{% endif %}
+				</div> <!-- row end.// -->
+				
+				
+				{% if products %}
 				<nav class="mt-4" aria-label="Page navigation sample">
 					<ul class="pagination">
 						{% if products.has_previous %}
@@ -156,7 +225,7 @@
 						</li>
 						<li class="page-item">
 							<a class="page-link"
-								href="{{ request.path }}?page={{products.previous_page_number}}">Previous</a>
+							href="{{ request.path }}?page={{products.previous_page_number}}">Previous</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">
@@ -195,7 +264,7 @@
 						</li>
 						<li class="page-item">
 							<a class="page-link"
-								href="{{ request.path }}?page={{ products.paginator.num_pages }}">Last</a>
+							href="{{ request.path }}?page={{ products.paginator.num_pages }}">Last</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">
@@ -208,18 +277,18 @@
 					</ul>
 				</nav>
 				{% endif %}
-	</main> <!-- col.// -->
-
-</div>
-
-</div> <!-- container .//  -->
+			</main> <!-- col.// -->
+			
+		</div>
+		
+	</div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
 
 <script>
- 
-	 
-
+	
+	
+	
 	function getsizes(cmbselect) {
 		
 		

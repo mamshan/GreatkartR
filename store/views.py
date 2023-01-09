@@ -144,10 +144,22 @@ def get_sizes(request):
         width = Product.objects.values('terrain').filter(width__icontains=width,height__icontains=profile,diameter__icontains=rim,is_available=True).exclude(terrain__exact='').annotate(Count('id'))
         product_count = width.count()        
 
+
+   
+    
+
     return JsonResponse({"width": list(width), "product_count": product_count }, status=200)
 
 
 def search(request):
+
+    width =None
+    profile = None
+    diameter = None
+    terrain = None
+    ah = None
+    lr =None
+
     if 'width' in request.GET:
         width = request.GET.get('width')
         profile = request.GET.get('profile')
@@ -166,6 +178,29 @@ def search(request):
 
     widths = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
    
+    if 'ah' in request.GET:
+        ah = request.GET.get('ah')
+        lr = request.GET.get('lr') 
+
+        view = request.GET.get('view1')
+
+        if request.GET.get('lr') =="Any":
+            if request.GET.get('ah') =="Any":
+                products = Product.objects.order_by('-price').filter(category=5,is_available=True)
+                product_count = products.count()
+            else:
+                products = Product.objects.order_by('-price').filter(category=5,product_name__icontains=ah,is_available=True)
+                product_count = products.count()
+        else:
+            if request.GET.get('ah') =="Any":
+                products = Product.objects.order_by('-price').filter(category=5,skuno__icontains=lr,is_available=True)
+                product_count = products.count()
+            else:
+                products = Product.objects.order_by('-price').filter(category=5,product_name__icontains=ah,skuno__icontains=lr,is_available=True)
+                product_count = products.count()
+                
+    ahs = Product.objects.values('width').filter(category=5,is_available=True).exclude(width__exact='').annotate(Count('id'))
+   
  
 
     context = {
@@ -177,6 +212,9 @@ def search(request):
         'sprofile': profile,
         'sdiameter': diameter,
         'sterrain': terrain,
+        'ahs': ahs,
+        'sah':ah,
+        'slr':lr
         
     }
 
