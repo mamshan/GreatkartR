@@ -22,12 +22,12 @@ def store(request, category_slug=None, brand=None):
             products = Product.objects.all().filter(category=categories,brand=brand, is_available=True).order_by('-price') 
             brands = Product.objects.values('brand').filter(category=categories, brand=brand,is_available=True).annotate(Count('id'))
             width = Product.objects.values('width').filter(category=categories,brand=brand, is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('width') 
-    
+
     else:
         products = Product.objects.all().filter(is_available=True).order_by('-price')  
         brands = Product.objects.values('brand').filter(is_available=True).annotate(Count('id'))
         width = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('width') 
-    
+
         if brand is not None:
             products = Product.objects.all().filter(brand=brand, is_available=True).order_by('-price') 
             brands = Product.objects.values('brand').filter(brand=brand,is_available=True).annotate(Count('id'))
@@ -88,7 +88,7 @@ def product_detail(request, category_slug,  product_slug, brand):
         orderproduct = None  
 
     try:
-        relastedprod = Product.objects.filter(width__icontains=single_product.width, height__icontains=single_product.height, diameter__icontains=single_product.diameter,is_available=True).exclude(id=single_product.id)
+        relastedprod = Product.objects.order_by('-price').filter(width__icontains=single_product.width, height__icontains=single_product.height, diameter__icontains=single_product.diameter,is_available=True).exclude(id=single_product.id)
     except OrderProduct.DoesNotExist:
         relastedprod = None
 
@@ -115,7 +115,7 @@ def search(request):
         profile = request.GET.get('profile')
         diameter = request.GET.get('diameter')
 
-        products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
+        products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
         product_count = products.count()
 
     context = {
@@ -158,10 +158,10 @@ def search(request):
         view = request.GET.get('view1')
 
         if request.GET.get('terrain') =="Any":
-            products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
+            products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
             product_count = products.count()
         else:
-            products = Product.objects.order_by('-created_date').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter, terrain__icontains=terrain,is_available=True)
+            products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter, terrain__icontains=terrain,is_available=True)
             product_count = products.count()
 
     widths = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))

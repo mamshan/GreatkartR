@@ -8,7 +8,7 @@ class Product(models.Model):
     skuno = models.CharField(max_length=200, unique=True)
     product_name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    description = models.TextField(max_length=500, blank=True)
+    description = models.TextField(max_length=2500, blank=True)
     brand = models.CharField(max_length=100, blank=True)
     country = models.CharField(max_length=100, blank=True)
 

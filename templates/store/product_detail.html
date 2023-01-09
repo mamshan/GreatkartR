@@ -47,11 +47,23 @@
         {% endif %}
 
     </div> 
-    
-    <p>{{ single_product.description }}</p>
-    
-    
+
+    {% if single_product.stock <= 0  %}
+        <h5 class="text-danger">Out of Stock</h5>
+        {% else %}
+
+        {% if in_cart  %}
+        <a href="#" class="btn  btn-success"> <span class="text">Added to cart</span> <i class="fas fa-check"></i>  </a>
+        <a href="{% url 'cart' %}" class="btn  btn-outline-primary"> <span class="text">View Cart</span> <i class="fas fa-eye"></i>  </a>
+
+        {% else %}
+        <a href="{% url 'add_cart' single_product.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+        {% endif %}
+        {% endif %}
     <hr>
+    
+    
+    
         <div class="row">
              <div class="col-sm-2">Brand</div>
              <div class="col-sm-3">{{ single_product.brand }}</div>
@@ -64,19 +76,11 @@
           <div class="col-sm-2">Stock</div>
           <div class="col-sm-3" id="stock_det"></div>
         </div> <!-- row.// -->
-        <hr>
-        {% if single_product.stock <= 0  %}
-        <h5 class="text-danger">Out of Stock</h5>
-        {% else %}
+         <hr>
 
-        {% if in_cart  %}
-        <a href="#" class="btn  btn-success"> <span class="text">Added to cart</span> <i class="fas fa-check"></i>  </a>
-        <a href="{% url 'cart' %}" class="btn  btn-outline-primary"> <span class="text">View Cart</span> <i class="fas fa-eye"></i>  </a>
-
-        {% else %}
-        <a href="{% url 'add_cart' single_product.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-        {% endif %}
-        {% endif %}
+         <p style=" white-space:  pre-wrap;word-wrap: break-word;">{{ single_product.description }}</p>
+    
+        
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
         </div> <!-- row.// -->
