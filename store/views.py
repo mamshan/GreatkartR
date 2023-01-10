@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.db.models import Sum
 from django.db.models import Sum, Count
 from django.http import JsonResponse
+import urllib.request
+import json
 
 def store(request, category_slug=None, brand=None):
     
@@ -91,7 +93,20 @@ def product_detail(request, category_slug,  product_slug, brand):
         relastedprod = Product.objects.order_by('-price').filter(width__icontains=single_product.width, height__icontains=single_product.height, diameter__icontains=single_product.diameter,is_available=True).exclude(id=single_product.id)
     except OrderProduct.DoesNotExist:
         relastedprod = None
+        
+    try:
+        # open a connection to a URL using urllib2
+        webUrl = urllib.request.urlopen("http://124.43.12.72/SW_APP/stock_balget.php?skuno=" + single_product.skuno)  
+        #get the result code and print it
+        # read the data from the URL and print it
+        data = webUrl.read()
+        y = json.loads(data)
+        stockbal = (y["totbal"])
+        stocktb = (y["tb"])
 
+    except:
+        stockbal = None
+        stocktb = None
 
     product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
 
@@ -102,7 +117,9 @@ def product_detail(request, category_slug,  product_slug, brand):
         'in_cart': in_cart if 'in_cart' in locals() else False,
         'product_gallery':product_gallery,
         'orderproduct':orderproduct,
-        'relastedprod': relastedprod
+        'relastedprod': relastedprod,
+        'stockbal': stockbal,
+        'stocktb': stocktb
     }
     return render(request, 'store/product_detail.html', context=context)
 

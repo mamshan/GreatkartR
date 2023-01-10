@@ -72,9 +72,10 @@
           <div class="col-sm-2">Country</div>
           <div class="col-sm-3">{{ single_product.country }}</div>
         </div> <!-- row.// -->
+        <input type="hidden" id="skuno"  name="skuno" value="{{ single_product.skuno }}">
         <div class="row">
           <div class="col-sm-2">Stock</div>
-          <div class="col-sm-3" id="stock_det"></div>
+          <div class="col-sm-3" id="stock_det">   {{ stocktb | safe }} </div>
         </div> <!-- row.// -->
          <hr>
 
@@ -151,8 +152,59 @@
 
 <script>
 
+ 
+function GetXmlHttpObject() {
+    var xmlHttp = null;
+    try {
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp = new XMLHttpRequest();
+    } catch (e) {
+        // Internet Explorer
+        try {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+    return xmlHttp;
+}
 
 
+
+function get_stock()
+{
+
+  xmlHttp = GetXmlHttpObject();
+    if (xmlHttp == null) {
+        alert("Browser does not support HTTP Request");
+        return;
+    }
+
+ 
+
+    
+   var url = "http://124.43.12.72/SW_APP/stock_balget.php";
+    url = url + "?skuno=" + document.getElementById('skuno').value;
+ 
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+		myObj = JSON.parse(this.responseText);
+
+document.getElementById('stock_det').innerHTML = myObj.tb;
+ 
+
+	  }
+	};
+
+	xmlhttp.open("GET", url , true);
+
+	xmlhttp.send();
+
+
+
+}
 
 
 
