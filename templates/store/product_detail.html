@@ -65,18 +65,37 @@
     
     
         <div class="row">
-             <div class="col-sm-2">Brand</div>
+             <div class="col-sm-4 fw-bold mb-1">Brand</div>
              <div class="col-sm-3">{{ single_product.brand }}</div>
         </div> <!-- row.// -->
         <div class="row">
-          <div class="col-sm-2">Country</div>
+          <div class="col-sm-4 fw-bold mb-1">Country</div>
           <div class="col-sm-3">{{ single_product.country }}</div>
         </div> <!-- row.// -->
         <input type="hidden" id="skuno"  name="skuno" value="{{ single_product.skuno }}">
         <div class="row">
-          <div class="col-sm-2">Stock</div>
-          <div class="col-sm-3" id="stock_det">   {{ stocktb | safe }} </div>
+          <div class="col-sm-4 fw-bold mb-1">Stock</div>
+          {% if stockbal > 3 %}
+          
+          {% else %}
+
+
+          {% endif %}
         </div> <!-- row.// -->
+        <div class="row">
+          <div class="col-sm-4 fw-bold mb-1">Pickup From</div>
+          <div class="col-sm-4">
+            <select class="form-select">
+              <option>Staple Street</option>
+              <option>Dehiwala</option>
+              <option>Polonnaruwa</option>
+              <option>Jaffna</option>
+            </select>
+          </div>
+
+
+        </div> <!-- row.// -->
+
          <hr>
 
          <p style=" white-space:  pre-wrap;word-wrap: break-word;">{{ single_product.description }}</p>
