@@ -423,13 +423,13 @@ p:last-child {
 
 .header-main {
   position: relative;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .brand-wrap .logo, .navbar-brand .logo {
   margin-right: 7px;
-  max-height: 65px;
+  max-height: 39px;
   display: inline-block;
 }
 
@@ -1460,8 +1460,7 @@ a[class*=card]:hover .title {
 }
 
 .topbar {
-  background-color: #1346af;
-  padding: 4px 0;
+  background-color: #1346af; 
 }
 
 .topbar .woostify-container {
@@ -1585,4 +1584,10 @@ div {
 
 .accordion-button {
   background-color: white !important;;
+}
+.seimg {
+  color: white;
+  height: 535px;
+  background-size: cover !important;
+  position: relative;
 }
