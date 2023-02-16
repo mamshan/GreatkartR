@@ -210,11 +210,11 @@
 					</div>	
 
 					<div class="row">
-						<div class="price" style="padding-top: 10%;">Price</div>
+						<div class="price" style="padding-top: 10%;width: 90%;border-bottom: 0.1rem solid;"></div>
 						<div class="price-wrap mt-2">
 							{% if product.discount > 0 %}
 							
-							<span class="price-old">Rs. {{ product.price }}</span>
+							<span class="price-old" style="font-size: 18px;">Rs. {{ product.price }}</span><br>
 							
 							<span class="price"  style="font-size: 25px;">Rs. {{ product.get_selling }}</span>
 							{% else %}
