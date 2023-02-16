@@ -16,78 +16,68 @@
         
 
          
-        <section class="section-name ">
+        <section class="section-name searchseation" >
             <div class="container">
          
                 
-                <div class="row searchseation">
+                <div class="row">
 
                     <h4>Are you looking to buy a Tyre?</h4>
                     
-                    <div class="col-sm-4">
+                    <div class="col-sm-5 ">
+                        <div class="col-sm-12">
                         <p>How to find car tyre size? <br>
-                            215 is the section width of a tyre, 60 is Aspect Ratio of tyre, 16 is Diameter of the wheel rim</p>
+                            225 is the section width of a tyre, 55 is Aspect Ratio of tyre, 18 is Diameter of the wheel rim</p>
                             
-                            <img class="img-fluid" src="{% static 'images/banners/tyresize.jpeg' %}">
+                            <img class="img-fluid" src="{% static 'images/banners/tyresize.png' %}">
                         </div>
-                        
-                        <div class="col-sm-5">
+                    </div>
+                        <div class="col-sm-7">
                             <form action="{% url 'search_size' %}" method="GET" class="search">
                                 
 
 
                                 <div class="row mb-3">
                                     
-                                     
-                                    <label class="col col-sm-3 col-form-label " for="width">Width</label>
-        
-                                    <label class="col-sm-3 col-form-label" for="profile">Profile</label>
+                                    <div class="col col-sm-4"> 
+                                    <label class="col col-form-label " for="width">Width</label>
+                                    <select class="form-select"  required onclick="getsizes('width');" id="width"name="width">
+                                        <option>Width</option>
+                                        {% for width in width %}
+                                        <option>{{ width.width }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    </div>
 
-                                    <label class="col-sm-3 col-form-label" for="diameter">Rim Size</label>
-                                     <label class="col-sm-3 col-form-label" for="terrain">Terrain</label>
-                                     
 
+                                    <div class="col col-sm-4"> 
+                                    <label class="col col-form-label" for="profile">Profile</label>
+                                    <select class="form-select" required onclick="getsizes('profile');" id="profile"name="profile">
+                                            
+                                        <option>Profile</option>
+                                        
+                                    </select>
+                                    </div>
+
+                                    <div class="col col-sm-4"> 
+                                    <label class="col col-form-label" for="diameter">Rim Size</label>
+                                    <select class="form-select"  required onclick="getsizes('rim');"   id="diameter"name="diameter">
+                                        <option>Rim Size</option>
+                                    </select>
+                                    </div>
+
+                                     
                                 </div>
 
                                 <div class="row mb-3">
-                                    
-                                     
-                                    <div class="col col-sm-3"> 
-                                        <select class="form-select"  required onclick="getsizes('width');" id="width"name="width">
-                                            <option>Width</option>
-                                            {% for width in width %}
-                                            <option>{{ width.width }}</option>
-                                            {% endfor %}
-                                        </select>
+                                
+                                <div class="col col-sm-4"> 
+                                    <label class="col col-form-label" for="diameter">Pickup Location</label>
+                                    <select class="form-select"  required   id="ploc"name="ploc">
+                                        <option>Any</option>
+                                    </select>
                                     </div>
-        
-                                    <div class="col col-sm-3"> 
-                                        <select class="form-select" required onclick="getsizes('profile');" id="profile"name="profile">
-                                            
-                                            <option>Profile</option>
-                                            
-                                        </select>
-                                    </div>
-
-                                    <div class="col col-sm-3"> 
-                                        <select class="form-select"  required onclick="getsizes('rim');"   id="diameter"name="diameter">
-                                            
-                                            <option>Rim Size</option>
-                                            
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="col col-sm-2"> 
-                                        <select class="form-select" id="terrain"name="terrain">
-                                            <option value="Any">Any</option>
-                                        </select>
-                                    </div>
-
                                 </div>
-                                
-                                
-                                
-                                 
                                 
                                 <button class="btn btn-primary" type="submit">
                                     Search

@@ -21,6 +21,10 @@ class Product(models.Model):
     price = models.IntegerField()
     discount = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
+
+    subimgs = models.ImageField(upload_to='photos/products')
+    
+
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE) 

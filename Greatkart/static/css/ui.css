@@ -865,7 +865,7 @@ a[class*=card]:hover .title {
 }
 .card-product-grid .info-wrap {
   overflow: hidden;
-  padding: 18px 18px;
+  padding: 10px 10px;
 }
 .card-product-grid .bottom-wrap {
   padding: 18px;
@@ -1568,14 +1568,17 @@ div {
   align-content: flex-end;
   top:20px;
   position: absolute;
+  border-radius: 25px;
+  background-color: rgba(50,50,50,.9);
 }
 
 
 @media only screen and (min-width: 1167px) {
 .searchseation {
-    width: calc(100% - 50px);
+    top:200px;
+    width: calc(50%);
     height: auto;
-    padding: 40px 30px 25px;
+    padding: 14px 10px 10px;
     position: relative;
     background-color: rgba(50,50,50,.9);
 }
@@ -1587,7 +1590,8 @@ div {
 }
 .seimg {
   color: white;
-  height: 535px;
-  background-size: cover !important;
+  height: 500px;
+  
   position: relative;
+  background-size: 100% 100% !important;
 }

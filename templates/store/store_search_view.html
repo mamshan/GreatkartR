@@ -25,6 +25,9 @@
 	<aside class="col-md-3">
 		
 <div class="card">
+	<div class="card-header">
+		Filter
+	</div>
 	<div class="card-body">
 
 		{% if 'width' in request.GET %}
@@ -71,15 +74,7 @@
 				</div>
 			</div>
 
-
-			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label" for="terrain">Terrain</label>
-				<div class="col-sm-6"> 
-					<select class="form-select" id="terrain"name="terrain">
-						<option selected>{{ sterrain }}</option>
-					</select>
-				</div>
-			</div>
+ 
 			
 			<input type="hidden" id="view1"  name="view1" value="view2">
 			
@@ -160,7 +155,7 @@
 
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
-			<span class="mr-md-auto">{{ product_count }} Items found </span>
+			<span class="mr-md-auto">{{ product_count }} Items found  for {{ swidth }}/{{ sprofile }} {{ sdiameter }}</span>
 			
 		</div>
 </header><!-- sect-heading -->
@@ -170,41 +165,47 @@
 	{% if products %}
     {% for product in products %}
 	<div class="col-md-3">
+		 
 		<figure class="card card-product-grid">
-			<div class="img-wrap"> 
-				
-				{% if product.discount > 0 %}
-				<span class="tag-on-sale onsale sale-left">-{{ product.discount }}%</span>
-				{% endif %}
-
-				
-				<img src="{{ product.images.url }}">
-				
-			</div> <!-- img-wrap.// -->
-			<figcaption class="info-wrap">
-				<div class="fix-height">
-					 
-					<div class="product-name">
-						<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
-						</div>
-
-					<div class="price-wrap mt-2">
-						{% if product.discount > 0 %}
+		 
+				 
+					<div class="img-wrap"> 
 						
-						<span class="price-old">Rs. {{ product.price }}</span>
-						 
-						<span class="price">Rs. {{ product.get_selling }}</span>
-						{% else %}
-						<span class="price">Rs. {{ product.price }}</span>
+						{% if product.discount > 0 %}
+						<span class="tag-on-sale onsale sale-left">-{{ product.discount }}%</span>
 						{% endif %}
 
+						
+						<img src="{{ product.images.url }}">
+						
+					</div> <!-- img-wrap.// -->
+					<figcaption class="info-wrap">
+						<div class="fix-height">
+							
+							<div class="product-name">
+								<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
+								</div>
+
+							<div class="price-wrap mt-2">
+								{% if product.discount > 0 %}
+								
+								<span class="price-old">Rs. {{ product.price }}</span>
+								
+								<span class="price">Rs. {{ product.get_selling }}</span>
+								{% else %}
+								<span class="price">Rs. {{ product.price }}</span>
+								{% endif %}
 
 
-					</div> <!-- price-wrap.// -->
-				</div>
-				
-			</figcaption>
+
+							</div> <!-- price-wrap.// -->
+						</div>
+						
+					</figcaption>
+				 
+			 
 		</figure>
+	 
 	</div> <!-- col.// -->
     {% endfor %}
 	{% else %}

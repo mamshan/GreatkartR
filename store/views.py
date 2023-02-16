@@ -190,12 +190,10 @@ def search(request):
 
         view = request.GET.get('view1')
 
-        if request.GET.get('terrain') =="Any":
-            products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
-            product_count = products.count()
-        else:
-            products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter, terrain__icontains=terrain,is_available=True)
-            product_count = products.count()
+ 
+        products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
+        product_count = products.count()
+
 
     widths = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
    
