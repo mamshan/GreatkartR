@@ -14,7 +14,7 @@
 	{% endif %}
 </div> <!-- container //  -->
 </section>
-
+<hr>
 <!-- ========================= SECTION INTRO END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
@@ -165,11 +165,11 @@
 <div class="row">
 	{% if products %}
     {% for product in products %}
-	<div class="col-md-3">
+	<div class="col-md-6">
 		 
 		<figure class="card card-product-grid">
-		 
-				 
+			<div class="row">
+				<div class="col-sm-6">
 					<div class="img-wrap"> 
 						
 						{% if product.discount > 0 %}
@@ -180,31 +180,59 @@
 						<img src="{{ product.images.url }}">
 						
 					</div> <!-- img-wrap.// -->
-					<figcaption class="info-wrap">
-						<div class="fix-height">
+					<figcaption class="info-wrap" >
+						 
 							
-							<div class="product-name">
-								<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
-								</div>
+							
 
-							<div class="price-wrap mt-2">
-								{% if product.discount > 0 %}
-								
-								<span class="price-old">Rs. {{ product.price }}</span>
-								
-								<span class="price">Rs. {{ product.get_selling }}</span>
-								{% else %}
-								<span class="price">Rs. {{ product.price }}</span>
-								{% endif %}
+						{% if product.subimgs %}
 
+						 
+						<img style="height: 80px;" class="img-fluid" src="{{ product.subimgs.url }}">
+						{% else %}
 
-
-							</div> <!-- price-wrap.// -->
-						</div>
+						<div  style="height: 80px;" ></div>
+						{% endif %}
+						 
 						
 					</figcaption>
-				 
-			 
+				</div>
+
+				<div class="col-sm-6">
+					<div class="row">
+						
+
+						<div class="product-name">
+							<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
+						</div>
+					</div>
+					
+					<div class="row">
+						 
+
+						<div class="price" style="padding-top: 10%;">Country</div>
+						<div  style="padding-left: 10%;">{{ product.country }} </div>
+						 
+					</div>	
+
+					<div class="row">
+						<div class="price" style="padding-top: 10%;width: 90%;border-bottom: 0.1rem solid;"></div>
+						<div class="price-wrap mt-2">
+							{% if product.discount > 0 %}
+							
+							<span class="price-old" style="font-size: 18px;">Rs. {{ product.price }}</span><br>
+							
+							<span class="price"  style="font-size: 25px;">Rs. {{ product.get_selling }}</span>
+							{% else %}
+							<span class="price"  style="font-size: 25px;">Rs. {{ product.price }}</span>
+							{% endif %}
+
+
+
+						</div> <!-- price-wrap.// -->
+					</div>
+				</div>
+			</div>
 		</figure>
 	 
 	</div> <!-- col.// -->
