@@ -1553,8 +1553,9 @@ a[class*=card]:hover .title {
 
 .searchseation {
   align-content: flex-end;
-  top:20px;
+  top:60px;
   position: absolute;
+  padding: 14px 10px 10px 10px;
   border-radius: 25px;
 }
 
@@ -1564,7 +1565,8 @@ a[class*=card]:hover .title {
     top:200px;
     width: calc(50%);
     height: auto;
-    padding: 14px 10px 10px;
+    padding: 14px 10px 10px 10px;
+    margin-left: 10px;
     position: relative;
     background-color: rgba(50,50,50,.9);
     
@@ -1589,4 +1591,10 @@ a[class*=card]:hover .title {
   position: relative;
  
   background-size: 100% 100% !important;
+}
+
+
+.site-footer {
+  background-color: rgba(0,0,0,1);
+  color: rgba(250,249,249,1);
 }

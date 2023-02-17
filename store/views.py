@@ -150,19 +150,19 @@ def get_sizes(request):
     width =""
     if 'width' in request.GET:
         width = request.GET.get('width') 
-        width = Product.objects.values('height').filter(width__icontains=width,is_available=True).exclude(width__exact='').annotate(Count('id'))
+        width = Product.objects.values('height').filter(width__icontains=width,is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('height') 
         product_count = width.count()
 
     if 'profile' in request.GET:
         width = request.GET.get('width') 
         profile = request.GET.get('profile')  
-        width = Product.objects.values('diameter').filter(width__icontains=width,height__icontains=profile,is_available=True).exclude(width__exact='').annotate(Count('id'))
+        width = Product.objects.values('diameter').filter(width__icontains=width,height__icontains=profile,is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('diameter') 
         product_count = width.count()    
     if 'rim' in request.GET:
         width = request.GET.get('width') 
         profile = request.GET.get('profile') 
         rim = request.GET.get('rim')  
-        width = Product.objects.values('terrain').filter(width__icontains=width,height__icontains=profile,diameter__icontains=rim,is_available=True).exclude(terrain__exact='').annotate(Count('id'))
+        width = Product.objects.values('terrain').filter(width__icontains=width,height__icontains=profile,diameter__icontains=rim,is_available=True).exclude(terrain__exact='').annotate(Count('id')).order_by('terrain') 
         product_count = width.count()        
 
 
