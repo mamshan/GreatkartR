@@ -171,48 +171,38 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="img-wrap"> 
-						
 						{% if product.discount > 0 %}
 						<span class="tag-on-sale onsale sale-left">-{{ product.discount }}%</span>
 						{% endif %}
-
-						
 						<img src="{{ product.images.url }}">
-						
 					</div> <!-- img-wrap.// -->
-					<figcaption class="info-wrap" >
-						 
-							
-							
-
-						{% if product.subimgs %}
-
-						 
-						<img style="height: 80px;" class="img-fluid" src="{{ product.subimgs.url }}">
-						{% else %}
-
-						<div  style="height: 80px;" ></div>
-						{% endif %}
-						 
-						
-					</figcaption>
 				</div>
 
 				<div class="col-sm-6">
 					<div class="row">
-						
+						<div class="product-name"  style="padding-top: 10%;">
+							{% if product.brandimg %}
+							<figcaption   style="height: 95px;">
+								{% if product.brandimg %}
+								<img style="max-height: 70px;max-width: 140px;padding-left: 10px;" class="img-fluid" src="{{ product.brandimg.url }}">
+								{% else %}
+								<div ></div>
+								{% endif %}
+							</figcaption>
+							{% endif %}
+							
+						</div>
+					</div>
 
-						<div class="product-name">
+					<div class="row">
+						<div class="product-name"  style="padding-top: 10%;"> 
 							<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
 						</div>
 					</div>
-					
+
 					<div class="row">
 						 
-
-						<div class="price" style="padding-top: 10%;">Country</div>
-						<div  style="padding-left: 10%;">{{ product.country }} </div>
-						 
+						<div  style="padding-left: 10%;"><span class="price" >Country : </span>{{ product.country }} </div>
 					</div>	
 
 					<div class="row">
@@ -232,6 +222,15 @@
 						</div> <!-- price-wrap.// -->
 					</div>
 				</div>
+			</div>
+			<div class="row">
+				<figcaption class="info-wrap"  style="height: 95px;">
+					{% if product.subimgs %}
+					<img style="max-height: 80px;max-width: 350px;padding-left: 10px;" class="img-fluid" src="{{ product.subimgs.url }}">
+					{% else %}
+					<div ></div>
+					{% endif %}
+				</figcaption>
 			</div>
 		</figure>
 	 
