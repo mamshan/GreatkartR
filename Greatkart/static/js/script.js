@@ -52,7 +52,8 @@ $(document).ready(function() {
 	} // end if
 
 
-    const myCarouselElement = document.querySelector('.carousel')
+     
+      const myCarouselElement = document.querySelector('.carousel')
       const carousel = new bootstrap.Carousel(myCarouselElement, {
         interval: 2000, 
       })

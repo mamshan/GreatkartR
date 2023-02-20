@@ -49,7 +49,8 @@ def store(request, category_slug=None, brand=None):
         'products': paged_products,
         'product_count': product_count,
         'width':width,
-        'brands': brands
+        'brands': brands,
+        'title': 'Best Tyres | Store'
     }
     return render(request, 'store/store.html', context=context)
 
@@ -73,6 +74,7 @@ def store1(request,  category_slug=None, subcategory_slug=None):
     context = {
         'products': paged_products,
         'product_count': product_count,
+        'title': 'Best Tyres | Store'
     }
     return render(request, 'store/store.html', context=context)
 
@@ -107,6 +109,9 @@ def product_detail(request, category_slug,  product_slug, brand):
         y = json.loads(data)
         stockbal = (y["totbal"])
         stocktb = (y["tb"])
+        
+
+
 
     except:
         stockbal = None
@@ -123,7 +128,8 @@ def product_detail(request, category_slug,  product_slug, brand):
         'orderproduct':orderproduct,
         'relastedprod': relastedprod,
         'stockbal': stockbal,
-        'stocktb': stocktb
+        'stocktb': stocktb,
+        'title': 'Best Tyres | ' + single_product.product_name
     }
     return render(request, 'store/product_detail.html', context=context)
 
@@ -142,7 +148,8 @@ def search(request):
     context = {
         'products': products,
         'q': width,
-        'product_count': product_count
+        'product_count': product_count,
+        'title': 'Best Tyres | Product Store'
     }
     return render(request, 'store/store.html', context=context)
 
@@ -191,7 +198,7 @@ def search(request):
         view = request.GET.get('view1')
 
  
-        products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
+        products = Product.objects.order_by('-price','product_name').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
         product_count = products.count()
 
 
@@ -233,7 +240,8 @@ def search(request):
         'sterrain': terrain,
         'ahs': ahs,
         'sah':ah,
-        'slr':lr
+        'slr':lr,
+        'title': 'Best Tyres | Product Search'
         
     }
 

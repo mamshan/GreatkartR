@@ -1443,6 +1443,7 @@ a[class*=card]:hover .title {
   align-items: center;
 }
 
+
 .right-sticky-callback div {
   margin: 0;
   padding: 0;
@@ -1459,8 +1460,10 @@ a[class*=card]:hover .title {
   padding-bottom: 15px;
 }
 
+
 .topbar {
-  background-color: #1346af; 
+  background-color: #1346af;
+
 }
 
 .topbar .woostify-container {
@@ -1473,27 +1476,30 @@ a[class*=card]:hover .title {
   align-items: center;
   flex-wrap: wrap;
 }
- 
+.topbar * {
+  color: #ffffff;
+  flex-direction: row;
+}
 
 .topbar .topbar-item {
   flex-grow: 1;
 }
 .topbar * {
   color: #ffffff;
-  flex-direction: row;
 }
 
 
-.topbar .topbar-center {
-    text-align: center;
-}
+@media (min-width: 991px) {
+  .topbar .topbar-center {
+      text-align: center;
+  }
+  }
+  .topbar .topbar-item {
+      flex-grow: 1;
+  }
 
-.topbar .topbar-item {
-    flex-grow: 1;
-}
-
-.topbar .topbar-right {
-  text-align: right;
+  .topbar .topbar-right {
+    text-align: right;
 }
 
 @media (max-width: 600px) {
@@ -1505,25 +1511,6 @@ a[class*=card]:hover .title {
   }
 }
 
-
-
-element.style {
-}
-.modal.left .modal-body, .modal.right .modal-body {
-    padding: 15px 15px 80px;
-}
-.modal-body {
-    position: relative;
-    flex: 1 1 auto;
-    padding: 1rem;
-}
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
 .modal-content {
   border-radius: 0rem;
 }
@@ -1566,11 +1553,9 @@ div {
 
 .searchseation {
   align-content: flex-end;
-  top:60px;
+  top:20px;
   position: absolute;
   border-radius: 25px;
-  padding: 14px 10px 10px 10px;
-  background-color: rgba(50,50,50,.9);
 }
 
 
@@ -1583,22 +1568,26 @@ div {
     margin-left: 10px;
     position: relative;
     background-color: rgba(50,50,50,.9);
+    
 }
 }
 
+
+
+  .searchseation {
+    padding: 10px;
+    background-color: rgba(50,50,50,.9);
+    box-sizing: border-box;
+}
 
 .accordion-button {
-  background-color: white !important;;
+  background-color: white !important;
 }
+
 .seimg {
   color: white;
   height: 500px;
-  
   position: relative;
+ 
   background-size: 100% 100% !important;
-}
-
-.site-footer {
-  background-color: rgba(0,0,0,1);
-  color: rgba(250,249,249,1);
 }

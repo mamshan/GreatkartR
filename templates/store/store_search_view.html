@@ -174,17 +174,21 @@
 						{% if product.discount > 0 %}
 						<span class="tag-on-sale onsale sale-left">-{{ product.discount }}%</span>
 						{% endif %}
-						<img src="{{ product.images.url }}">
+						<a class="zb" rel="group" href="{{ product.images.url }}" title="long">
+						<img 
+						src="{{ product.images.url }}"
+						>
+						</a>
 					</div> <!-- img-wrap.// -->
 				</div>
 
 				<div class="col-sm-6">
 					<div class="row">
-						<div class="product-name"  style="padding-top: 10%;">
+						<div style="padding-top: 7%;">
 							{% if product.brandimg %}
-							<figcaption   style="height: 95px;">
+							<figcaption   style="max-height: 85px;">
 								{% if product.brandimg %}
-								<img style="max-height: 70px;max-width: 140px;padding-left: 10px;" class="img-fluid" src="{{ product.brandimg.url }}">
+								<img style="max-height: 85px;max-width: 140px;padding-left: 10px;" class="img-fluid" src="{{ product.brandimg.url }}">
 								{% else %}
 								<div ></div>
 								{% endif %}
@@ -195,7 +199,7 @@
 					</div>
 
 					<div class="row">
-						<div class="product-name"  style="padding-top: 10%;"> 
+						<div class="product-name"  style="padding-top: 5%;"> 
 							<a href="{{  product.get_url }}" class="title">{{ product.product_name }}</a>
 						</div>
 					</div>

@@ -41,7 +41,7 @@
                                     
                                     <div class="col col-sm-4"> 
                                     <label class="col col-form-label  col-form-label-sm" for="width">Width</label>
-                                    <select class="form-select form-select-sm"  required onclick="getsizes('width');" id="width"name="width">
+                                    <select class="form-select form-select-sm"  required onblur="getsizes('width');" onclick="getsizes('width');" id="width"name="width">
                                         <option>Width</option>
                                         {% for width in width %}
                                         <option>{{ width.width }}</option>
@@ -52,7 +52,7 @@
 
                                     <div class="col col-sm-4"> 
                                     <label class="col col-form-label col-form-label-sm" for="profile">Profile</label>
-                                    <select class="form-select form-select-sm" required onclick="getsizes('profile');" id="profile"name="profile">
+                                    <select class="form-select form-select-sm" required onblur="getsizes('profile');" onclick="getsizes('profile');" id="profile"name="profile">
                                             
                                         <option>Profile</option>
                                         
@@ -61,7 +61,7 @@
 
                                     <div class="col col-sm-4"> 
                                     <label class="col col-form-label col-form-label-sm" for="diameter">Rim Size</label>
-                                    <select class="form-select form-select-sm"  required onclick="getsizes('rim');"   id="diameter"name="diameter">
+                                    <select class="form-select form-select-sm"  required onblur="getsizes('rim');" onclick="getsizes('rim');"   id="diameter"name="diameter">
                                         <option>Rim Size</option>
                                     </select>
                                     </div>

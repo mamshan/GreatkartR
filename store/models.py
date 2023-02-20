@@ -23,6 +23,7 @@ class Product(models.Model):
     images = models.ImageField(upload_to='photos/products')
 
     subimgs = models.ImageField(upload_to='photos/products')
+    brandimg = models.ImageField(upload_to='photos/products')
     
 
     stock = models.IntegerField()
