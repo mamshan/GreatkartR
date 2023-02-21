@@ -16,14 +16,24 @@
         
 
          
-        <section class="section-name searchseation" >
-            <div class="container">
-         
-                
-                <div class="row">
+            <section class="section-name searchseation" >
+                <div class="container">
 
-                    <h4 class="small">Are you looking to buy a Tyre?</h4>
+                <h4 class="small">Are you looking for </h4>
+                <ul class="nav nav-pills nav-fill mb-2" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active link-light"  id="tyre-tab" data-bs-toggle="tab" role="tab"  aria-controls="tyre" data-bs-target="#tyre"  aria-selected="true" href="#">Tyres</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link link-light"  id="battery-tab" data-bs-toggle="tab"  role="tab" aria-controls="battery" data-bs-target="#battery"  aria-selected="false" href="#">Batteries</a>
+                    </li>
                     
+                  </ul>
+         
+                  <div class="tab-content" id="myTabContent">
+                
+                <div   id="tyre" aria-labelledby="tyre-tab" class="tab-pane fade show active">
+                   <div class="row">
                     <div class="col-sm-5 ">
                         <div class="col-sm-12">
                         <p class="small">How to find car tyre size? <br>
@@ -32,43 +42,95 @@
                             <img class="img-fluid" src="{% static 'images/banners/tyresize.png' %}">
                         </div>
                     </div>
+                    <div class="col-sm-7">
+                        <form action="{% url 'search_size' %}" method="GET" class="search">
+                            <div class="row mb-3">
+                                <div class="col col-sm-4"> 
+                                <label class="col col-form-label  col-form-label-sm" for="width">Width</label>
+                                <select class="form-select form-select-sm"  required onblur="getsizes('width');" onclick="getsizes('width');" id="width"name="width">
+                                    <option>Width</option>
+                                    {% for width in width %}
+                                    <option>{{ width.width }}</option>
+                                    {% endfor %}
+                                </select>
+                                </div>
+                                <div class="col col-sm-4"> 
+                                <label class="col col-form-label col-form-label-sm" for="profile">Profile</label>
+                                <select class="form-select form-select-sm" required onblur="getsizes('profile');" onclick="getsizes('profile');" id="profile"name="profile">
+                                    <option>Profile</option>
+                                </select>
+                                </div>
+
+                                <div class="col col-sm-4"> 
+                                <label class="col col-form-label col-form-label-sm" for="diameter">Rim Size</label>
+                                <select class="form-select form-select-sm"  required onblur="getsizes('rim');" onclick="getsizes('rim');"   id="diameter"name="diameter">
+                                    <option>Rim Size</option>
+                                </select>
+                                </div>
+
+                                    
+                            </div>
+
+                            <div class="row mb-3">
+                            
+                            <div class="col col-sm-4"> 
+                                <label class="col col-form-label col-form-label-sm" for="diameter">Pickup Location</label>
+                                <select class="form-select  form-select-sm"  required   id="ploc"name="ploc">
+                                    <option>Any</option>
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-sm" type="submit">
+                                Search
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </form> 
+                    </div>
+                </div>
+                </div> <!-- row.// -->
+                
+                <div   id="battery" aria-labelledby="battery-tab" class="tab-pane fade">
+
+
+                    <div class="row">
+                        <div class="col-sm-5 ">
+                            <div class="col-sm-12">
+                            <p class="small"></p> 
+
+                            <img class="img-fluid" src="{% static 'images/banners/battery.png' %}">
+                            </div>
+                        </div>
                         <div class="col-sm-7">
                             <form action="{% url 'search_size' %}" method="GET" class="search">
-                                
-
-
                                 <div class="row mb-3">
-                                    
                                     <div class="col col-sm-4"> 
-                                    <label class="col col-form-label  col-form-label-sm" for="width">Width</label>
-                                    <select class="form-select form-select-sm"  required onblur="getsizes('width');" onclick="getsizes('width');" id="width"name="width">
+                                    <label class="col col-form-label  col-form-label-sm" for="width">AH</label>
+                                    <select class="form-select form-select-sm"  required onblur="getsizes('width');" onclick="getsizes('width');" id="ah"name="ah">
                                         <option>Width</option>
                                         {% for width in width %}
                                         <option>{{ width.width }}</option>
                                         {% endfor %}
                                     </select>
                                     </div>
-
-
                                     <div class="col col-sm-4"> 
-                                    <label class="col col-form-label col-form-label-sm" for="profile">Profile</label>
-                                    <select class="form-select form-select-sm" required onblur="getsizes('profile');" onclick="getsizes('profile');" id="profile"name="profile">
-                                            
+                                    <label class="col col-form-label col-form-label-sm" for="profile">L/R</label>
+                                    <select class="form-select form-select-sm" required onblur="getsizes('profile');" onclick="getsizes('profile');" id="lr"name="lr">
                                         <option>Profile</option>
-                                        
                                     </select>
                                     </div>
-
+    
                                     <div class="col col-sm-4"> 
-                                    <label class="col col-form-label col-form-label-sm" for="diameter">Rim Size</label>
-                                    <select class="form-select form-select-sm"  required onblur="getsizes('rim');" onclick="getsizes('rim');"   id="diameter"name="diameter">
+                                    <label class="col col-form-label col-form-label-sm" for="diameter">CCA</label>
+                                    <select class="form-select form-select-sm"  required onblur="getsizes('rim');" onclick="getsizes('rim');"   id="cca"name="cca">
                                         <option>Rim Size</option>
                                     </select>
                                     </div>
-
-                                     
+    
+                                        
                                 </div>
-
+    
                                 <div class="row mb-3">
                                 
                                 <div class="col col-sm-4"> 
@@ -86,9 +148,15 @@
                                 
                             </form> 
                         </div>
-                        
-                    </div> <!-- row.// -->
+                    </div>
+
+                </div>
+            </div>
+                
                 </div><!-- container // -->
+            
+
+            
             </section>
 
 
@@ -102,12 +170,8 @@
 </section>
 <!-- ========================= SECTION MAIN END// ========================= -->
 
-
-<div class="row">
-    <hr>
-</div>
-
-<section  class="section-intro padding-y-sm">
+ 
+<section  class="container  mt-5 mb-5">
     <div class="row">
      
       
@@ -137,15 +201,10 @@
 </section>
  
 
-
-<div class="row">
-    <hr>
-</div>
-
-
+ 
 
  
-    <section  class="section-intro padding-y-sm">
+    <section  class="container mt-5 mb-5">
             
     <div class='row'>
         <div class="col-sm-1  d-flex justify-content-center">
