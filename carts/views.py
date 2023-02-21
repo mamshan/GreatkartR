@@ -4,6 +4,8 @@ from category.models import Category
 from store.models import Product
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
+import urllib.request
+import json
 
 def _cart_id(request):
     cart_id = request.session.session_key
@@ -11,7 +13,89 @@ def _cart_id(request):
         cart_id = request.session.create()
     return cart_id
 
+def add_cart_ind(request):
+    product_id = request.GET.get('product_id')
+    quantity = request.GET.get('quantity')
+
+    current_user = request.user
+    product = Product.objects.get(id=product_id)    # Get object product
+
+    try:
+        cart = Cart.objects.get(cart_id=_cart_id(request=request))  # Get cart using the _cart_id
+    except Cart.DoesNotExist:
+        cart = Cart.objects.create(
+            cart_id=_cart_id(request)
+        )
+    cart.save()
+
+    if current_user.is_authenticated:
+        is_exists_cart_item = CartItem.objects.filter(product=product, user=current_user).exists()
+        if is_exists_cart_item:
+            try:
+                cart = Cart.objects.get(cart_id=_cart_id(request=request))  # Get cart using the _cart_id
+                cart_item = CartItem.objects.get(product=product, user=current_user)
+                cart_item.quantity += 1
+                cart_item.save()
+            except CartItem.DoesNotExist:
+                saleprice = product.price * ((100-product.discount)/100)
+                cart_item = CartItem.objects.create(
+                    product=product,
+                    price=saleprice,
+                    cart=cart,
+                    user=current_user,
+                    quantity=quantity
+                )
+                cart_item.save()
+
+                webUrl = urllib.request.urlopen("http://124.43.12.72/SW_APP/order_process.php?stk_no=" + str(product.skuno) + "&refno=" + str(cart.id) + "&quantity=" + str(quantity))  
+                return webUrl
+                data = webUrl.read()
+                y = json.loads(data) 
+
+        else:
+            saleprice = product.price * ((100-product.discount)/100)
+            cart_item = CartItem.objects.create(
+                    product=product,
+                    cart=cart,
+                    price=saleprice,
+                    user=current_user,
+                    quantity=quantity
+                )
+            cart_item.save()
+            webUrl = urllib.request.urlopen("http://124.43.12.72/SW_APP/order_process.php?stk_no=" + str(product.skuno) + "&refno=" + str(cart.id) + "&quantity=" + str(quantity))  
+            data = webUrl.read()
+            y = json.loads(data) 
+    else:
+        try:
+            cart = Cart.objects.get(cart_id=_cart_id(request=request))  # Get cart using the _cart_id
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(
+            cart_id=_cart_id(request)
+            )
+            cart.save()
+
+        try:
+            cart_item = CartItem.objects.get(product=product, cart=cart)
+            cart_item.quantity += 1
+            cart_item.save()
+
+        except CartItem.DoesNotExist:
+            saleprice = product.price * ((100-product.discount)/100)
+            cart_item = CartItem.objects.create(
+                product=product,
+                price=saleprice,
+                cart=cart,
+                quantity=quantity
+            )
+            cart_item.save()
+            webUrl = urllib.request.urlopen("http://124.43.12.72/SW_APP/order_process.php?stk_no=" + str(product.skuno) + "&refno=" + str(cart.id) + "&quantity=" + str(quantity))  
+            data = webUrl.read()
+            y = json.loads(data) 
+
+    return redirect('cart')
+
 def add_cart(request, product_id):
+    
     current_user = request.user
     product = Product.objects.get(id=product_id)    # Get object product
 
@@ -76,6 +160,7 @@ def add_cart(request, product_id):
             cart_item.save()
 
     return redirect('cart')
+
 
 def cart(request, total=0, quantity=0, cart_items=None):
     try:

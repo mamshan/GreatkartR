@@ -24,11 +24,11 @@
 			<aside class="col-md-3">
 				
 				{% if '/store/category/batteries/' != request.path %}
-				<div class="card">
-					<div class="card-header">
+				<div class="card  border-0">
+					<div class="card-header  border-0">
 						Filter
 					</div>
-					<div class="card-body">
+					<div class="card-body  border-0">
 						
 						<form action="{% url 'search_size' %}" method="GET" class="search">
 							
@@ -91,9 +91,11 @@
 					
 				</div> <!-- card.// -->
 				{% else %}
-				<div class="card">
-					
-					<div class="card-body">
+				<div class="card  border-0">
+					<div class="card-header  border-0">
+						Filter
+					</div>
+					<div class="card-body  border-0">
 						
 						<form action="{% url 'search_size' %}" method="GET" class="search">
 							
@@ -104,13 +106,13 @@
 									<select class="form-select" onclick="getsizes('AH');" id="ah"name="ah">
 										
 										<option>Any</option>
-										{% for ah in ah %}
-										{% if ah.ah == sah %}
-										<option selected>{{ ah.ah }}</option>
-										{% else %}
-										<option>{{ ah.ah }}</option>
-										{% endif %}
-										{% endfor %}
+						{% for ah in ahs %}
+						{% if ah.ah == sah %}
+						<option selected>{{ ah.ah }}</option>
+						{% else %}
+						<option>{{ ah.ah }}</option>
+						{% endif %}
+						{% endfor %}
 									</select>
 								</div>
 							</div>
@@ -119,22 +121,19 @@
 							
 							
 							<div class="row mb-3">
-								<label class="col-sm-4 col-form-label" for="terrain">Left / Right</label>
+								<label class="col-sm-4 col-form-label" for="cca">CCA</label>
 								<div class="col-sm-6"> 
-									<select class="form-select" id="lr"name="lr">
-
-										{% if slr != None %}
-										{% if slr == "L" %}
-										<option value="L" selected>Left</option>
-										{% else %}
-										<option  value="R" selected>Right</option>
-										{% endif %}
-										{% else %}
+									<select class="form-select" id="cca"name="cca">
 
 										<option>Any</option>
-										<option value="L">Left</option>
-										<option value="R">Right</option>
+										{% for cca in ccas %}
+										{% if cca.cca == scca %}
+										<option selected>{{ cca.cca }}</option>
+										{% else %}
+										<option>{{ cca.cca }}</option>
 										{% endif %}
+										{% endfor %} 
+
 									</select>
 								</div>
 							</div>

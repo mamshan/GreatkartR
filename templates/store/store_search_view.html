@@ -39,7 +39,7 @@
 				<label class="col col-sm-4 col-form-label " for="width">Width</label>
 				<div class="col-sm-6"> 
 					<select class="form-select" onclick="getsizes('width');" id="width"name="width">
-						
+						 
 						<option>Width</option>
 						{% for width in width %}
 						{% if width.width == swidth %}
@@ -95,7 +95,7 @@
 					<select class="form-select" onclick="getsizes('AH');" id="ah"name="ah">
 						
 						<option>Any</option>
-						{% for ah in ah %}
+						{% for ah in ahs %}
 						{% if ah.ah == sah %}
 						<option selected>{{ ah.ah }}</option>
 						{% else %}
@@ -110,26 +110,20 @@
 			
 			
 			<div class="row mb-3">
-				<label class="col-sm-4 col-form-label" for="terrain">Left / Right</label>
+				<label class="col-sm-4 col-form-label" for="cca">CCA</label>
 				<div class="col-sm-6"> 
-					<select class="form-select" id="lr"name="lr">
+					<select class="form-select" id="cca"name="cca">
 						 
-						{% if slr != None and  slr != "Any" %}
-						{% if slr == "L" %}
 						<option>Any</option>
-						<option value="L" selected>Left</option>
-						<option value="R">Right</option>
+						{% for cca in ccas %}
+						{% if cca.cca == scca %}
+						<option selected>{{ cca.cca }}</option>
 						{% else %}
-						<option>Any</option>
-						<option value="R" selected>Right</option>
-						<option value="L">Left</option>
+						<option>{{ cca.cca }}</option>
 						{% endif %}
-						{% else %}
+						{% endfor %}
 
-						<option>Any</option>
-						<option value="L">Left</option>
-						<option value="R">Right</option>
-						{% endif %}
+
 					</select>
 				</div>
 			</div>
@@ -156,8 +150,25 @@
 
 <header class="border-bottom mb-4 pb-3">
 		<div class="form-inline">
+			{% if sah == None %}
 			<span class="mr-md-auto">{{ product_count }} Items found  for {{ swidth }}/{{ sprofile }} {{ sdiameter }}</span>
-			
+			{% else %}
+			<span class="mr-md-auto">{{ product_count }} Items found  
+				{% if sah == "AH" %}
+				for AH : Any  and 
+				{% else %}
+				for AH : {{ sah }}  and 
+				{% endif %}
+
+				{% if scca == "CCA" %}
+				for CCA : Any  
+				{% else %}
+				for CCA : {{ scca }}  
+				{% endif %}
+			 
+
+			</span>
+			{% endif %}
 		</div>
 </header><!-- sect-heading -->
  

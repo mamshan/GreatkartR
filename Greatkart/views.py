@@ -14,6 +14,11 @@ def home(request):
     height = Product.objects.values('height').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('height') 
     diameter = Product.objects.values('diameter').filter(is_available=True).exclude(width__exact='').annotate(Count('id')).order_by('diameter') 
 
+
+    ah = Product.objects.values('ah').filter(is_available=True).exclude(ah__exact='').annotate(Count('id')).order_by('ah') 
+    cca = Product.objects.values('cca').filter(is_available=True).exclude(cca__exact='').annotate(Count('id')).order_by('cca') 
+      
+  
   
 
     products = Product.objects.all().filter(width__exact='235',is_available=True)
@@ -22,18 +27,26 @@ def home(request):
         'width': width,
         'height': height,
         'diameter': diameter,
+        'ah': ah,
+        'cca':cca,
+        'title': "Best Tyre | Tyres & Battery"
     }
     return render(request, 'home.html', context)
 
 
 
 def brands(request):
-  
+    context = {
+        'title': "Best Tyre | Brands"
+    }
  
-    return render(request, 'home/brands.html')
+    return render(request, 'home/brands.html', context)
 
 def faq(request):
-    return render(request, 'home/faq.html')
+    context = {
+        'title': "Best Tyre | FAQ"
+    }
+    return render(request, 'home/faq.html', context)
 
 def contactus(request):
 

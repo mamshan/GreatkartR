@@ -18,12 +18,16 @@ class Product(models.Model):
     diameter = models.CharField(max_length=10, blank=True)
     terrain = models.CharField(max_length=20, blank=True)
 
+
+    ah = models.CharField(max_length=20, blank=True)
+    cca = models.CharField(max_length=20, blank=True)
+
     price = models.IntegerField()
     discount = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
 
-    subimgs = models.ImageField(upload_to='photos/products')
-    brandimg = models.ImageField(upload_to='photos/products')
+    subimgs = models.ImageField(upload_to='photos/products',blank=True, null=True,)
+    brandimg = models.ImageField(upload_to='photos/products', blank=True, null=True,)
     
 
     stock = models.IntegerField()

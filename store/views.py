@@ -45,11 +45,17 @@ def store(request, category_slug=None, brand=None):
     paged_products = paginator.get_page(page)
     product_count = products.count()
 
+    ahs = Product.objects.values('ah').filter(category=5,is_available=True).exclude(ah__exact='').annotate(Count('id'))
+    ccas = Product.objects.values('cca').filter(category=5,is_available=True).exclude(cca__exact='').annotate(Count('id'))
+   
+
     context = {
         'products': paged_products,
         'product_count': product_count,
         'width':width,
         'brands': brands,
+        'ahs':ahs,
+        'ccas':ccas,
         'title': 'Best Tyres | Store'
     }
     return render(request, 'store/store.html', context=context)
@@ -101,22 +107,25 @@ def product_detail(request, category_slug,  product_slug, brand):
         relastedprod = None
         
     try:
-        # open a connection to a URL using urllib2
+        
         webUrl = urllib.request.urlopen("http://124.43.12.72/SW_APP/stock_balget.php?skuno=" + single_product.skuno)  
-        #get the result code and print it
-        # read the data from the URL and print it
         data = webUrl.read()
         y = json.loads(data)
         stockbal = (y["totbal"])
-        stocktb = (y["tb"])
+        a = (y["a"])
+        b = (y["b"])
+        c = (y["c"])
+        d = (y["d"])
         
 
 
 
     except:
-        stockbal = None
-        stocktb = None
-
+        stockbal = 0 
+        a = 0
+        b = 0
+        c = 0
+        d = 0
     product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
 
 
@@ -127,9 +136,12 @@ def product_detail(request, category_slug,  product_slug, brand):
         'product_gallery':product_gallery,
         'orderproduct':orderproduct,
         'relastedprod': relastedprod,
-        'stockbal': stockbal,
-        'stocktb': stocktb,
-        'title': 'Best Tyres | ' + single_product.product_name
+        'stockbal': stockbal, 
+        'title': 'Best Tyres | ' + single_product.product_name,
+        'a': a,
+        'b': b,
+        'c': c,
+        'd': d,
     }
     return render(request, 'store/product_detail.html', context=context)
 
@@ -144,6 +156,8 @@ def search(request):
 
         products = Product.objects.order_by('-price').filter(width__icontains=width, height__icontains=profile, diameter__icontains=diameter,is_available=True)
         product_count = products.count()
+
+
 
     context = {
         'products': products,
@@ -179,6 +193,22 @@ def get_sizes(request):
     return JsonResponse({"width": list(width), "product_count": product_count }, status=200)
 
 
+
+def get_agentdt(request):
+    agentdt =""
+    if 'location' in request.GET:
+        if request.GET.get('location')  == "Dehiwala":
+            agentdt = "<table class='table'><tr><td>Priyanka</td><td>077111111</td></tr></table>"
+        if request.GET.get('location')  == "Staple Street":
+            agentdt = "<table class='table'><tr><td>Chathuni</td><td>077111110</td></tr></table>"
+        if request.GET.get('location')  == "Polonnaruwa":
+            agentdt = "<table class='table'><tr><td>Harshana</td><td>077111112</td></tr></table>"
+        if request.GET.get('location')  == "Jaffna":
+            agentdt = "<table class='table'><tr><td>Ronald</td><td>077111113</td></tr></table>"
+    
+    return JsonResponse({"agdt":"Agent Details","agcontdt": agentdt }, status=200)
+
+
 def search(request):
 
     width =None
@@ -204,31 +234,28 @@ def search(request):
 
     widths = Product.objects.values('width').filter(is_available=True).exclude(width__exact='').annotate(Count('id'))
    
+    ah = None
+    lr = None
+    cca = None
+
     if 'ah' in request.GET:
-        ah = request.GET.get('ah')
-        lr = request.GET.get('lr') 
+        if 'ah' in request.GET:
+            ah = request.GET.get('ah')
+        
+        if 'lr' in request.GET:
+            lr = request.GET.get('lr') 
 
-        view = request.GET.get('view1')
+        if 'cca' in request.GET:
+            cca = request.GET.get('cca') 
 
-        if request.GET.get('lr') =="Any":
-            if request.GET.get('ah') =="Any":
-                products = Product.objects.order_by('-price').filter(category=5,is_available=True)
-                product_count = products.count()
-            else:
-                products = Product.objects.order_by('-price').filter(category=5,product_name__icontains=ah,is_available=True)
-                product_count = products.count()
-        else:
-            if request.GET.get('ah') =="Any":
-                products = Product.objects.order_by('-price').filter(category=5,skuno__icontains=lr,is_available=True)
-                product_count = products.count()
-            else:
-                products = Product.objects.order_by('-price').filter(category=5,product_name__icontains=ah,skuno__icontains=lr,is_available=True)
-                product_count = products.count()
-                
-    ahs = Product.objects.values('width').filter(category=5,is_available=True).exclude(width__exact='').annotate(Count('id'))
+
+        
+        products = Product.objects.order_by('-price').filter(Q(ah__icontains=ah) | Q(cca__icontains=cca),category=5,is_available=True)
+        product_count = products.count()
+                    
+    ahs = Product.objects.values('ah').filter(category=5,is_available=True).exclude(ah__exact='').annotate(Count('id'))
+    ccas = Product.objects.values('cca').filter(category=5,is_available=True).exclude(cca__exact='').annotate(Count('id'))
    
- 
-
     context = {
         'products': products,
         'q': width,
@@ -239,6 +266,8 @@ def search(request):
         'sdiameter': diameter,
         'sterrain': terrain,
         'ahs': ahs,
+        'ccas': ccas,
+        'scca':cca,
         'sah':ah,
         'slr':lr,
         'title': 'Best Tyres | Product Search'
@@ -247,10 +276,8 @@ def search(request):
 
 
 
-    if view == "view1":   
-        return render(request, 'store/store_search.html', context=context)
-    else:
-        return render(request, 'store/store_search_view.html', context=context)
+   
+    return render(request, 'store/store_search_view.html', context=context)
 
 
 @csrf_exempt

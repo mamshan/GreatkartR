@@ -53,13 +53,7 @@
                                             <figcaption class="info">
                                                 <a href="{{ cart_item.product.get_url }}" class="title text-dark">
                                                     {{ cart_item.product.product_name }}</a>
-                                                <p class="text-muted small">
-                                                    {% if cart_item.variations.all %}
-                                                    {% for item in cart_item.variations.all %}
-                                                    {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
-                                                    {% endfor %}
-                                                    {% endif %}
-                                                </p>
+													<p class="text-muted small">Brand: {{ cart_item.product.brand }} <br> Country: {{ cart_item.product.country }} </p>
                                             </figcaption>
                                         </figure>
                                     </td>
@@ -68,8 +62,8 @@
                                     </td>
                                     <td>
                                         <div class="price-wrap">
-                                            <var class="price">$ {{ cart_item.sub_total }}</var>
-                                            <small class="text-muted"> $ {{ cart_item.product.price }} each </small>
+                                            <var class="price">Rs. {{ cart_item.sub_total }}</var>
+                                            <small class="text-muted">Rs. {{ cart_item.price }} each </small>
                                         </div> <!-- price-wrap .// -->
                                     </td>
                                 </tr>
@@ -85,16 +79,13 @@
 					<div class="card-body">
 						<dl class="dlist-align">
 							<dt>Total price:</dt>
-							<dd class="text-right">${{ total }}</dd>
+							<dd class="text-right">Rs. {{ total }}</dd>
 						</dl>
-						<dl class="dlist-align">
-							<dt>Tax:</dt>
-							<dd class="text-right">${{ tax }}</dd>
-						</dl>
+						 
 						<dl class="dlist-align">
 							<dt>Total:</dt>
 							<dd class="text-right text-dark b">
-								<strong>${{ grand_total }}</strong>
+								<strong>Rs. {{ grand_total }}</strong>
 							</dd>
 						</dl>
 						<hr />
@@ -134,6 +125,7 @@
 		return cookieValue;
 	}
 
+	grand_total = ("{{ grand_total }}"/375)
 	var amount = parseFloat("{{ grand_total }}");
 	var url = "{% url 'payments' %}";
 	var csrfToken = getCookie('csrftoken');

@@ -10,6 +10,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('search_size/', views.search, name='search_size'),
     path('get_sizes/', views.get_sizes, name='get_sizes'),
+    path('get_agentdt/', views.get_agentdt, name='get_agentdt'),
     path('upload_image/', views.upload_image),
 ]
 

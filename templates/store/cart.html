@@ -43,8 +43,7 @@
             <!-- col.// -->
                         <div class="col"> 
                             <div class="input-group input-spinner">
-                                <div class="input-group-prepend">
-                              
+                                <div class="input-group-prepend">                              
                                 <a class="btn btn-light" href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" id="button-minus"> <i class="fa fa-minus"></i> </a>
                                 </div>
                                 <input type="text" class="form-control"  value="{{ cart_item.quantity }}">
@@ -85,10 +84,12 @@
                 </dl>
                 <hr>
                 <p class="text-center mb-3">
-                    <img src="{% static 'images/misc/payments.png' }" height="26">
+                    <img src="{% static 'images/misc/payments.png' %}" height="26">
                 </p>
-                <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
-                <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+                <div class="row">
+                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
+                    <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+                </div>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->
     

@@ -97,7 +97,7 @@
                     <div class="row">
                         <div class="col-sm-5 ">
                             <div class="col-sm-12">
-                            <p class="small"></p> 
+                            <p class="small">Find By AH : Ampere hours or CCA : Cold cranking amps </p> 
 
                             <img class="img-fluid" src="{% static 'images/banners/battery.png' %}">
                             </div>
@@ -107,26 +107,29 @@
                                 <div class="row mb-3">
                                     <div class="col col-sm-4"> 
                                     <label class="col col-form-label  col-form-label-sm" for="width">AH</label>
-                                    <select class="form-select form-select-sm"  required onblur="getsizes('width');" onclick="getsizes('width');" id="ah"name="ah">
-                                        <option>Width</option>
-                                        {% for width in width %}
-                                        <option>{{ width.width }}</option>
+                                    <select class="form-select form-select-sm"  required onblur="getsizes('ah');" onclick="getsizes('ah');" id="ah"name="ah">
+                                        <option>AH</option>
+                                        {% for ah in ah %}
+                                        <option>{{ ah.ah }}</option>
                                         {% endfor %}
                                     </select>
                                     </div>
+
+                                    <div class="col col-sm-4 text-center"> 
+                                        <label class="text-center" for="profile">Or</label>
+                                    </div>
+
                                     <div class="col col-sm-4"> 
-                                    <label class="col col-form-label col-form-label-sm" for="profile">L/R</label>
-                                    <select class="form-select form-select-sm" required onblur="getsizes('profile');" onclick="getsizes('profile');" id="lr"name="lr">
-                                        <option>Profile</option>
+                                    <label class="col col-form-label col-form-label-sm" for="profile">CCA</label>
+                                    <select class="form-select form-select-sm" required onblur="getsizes('cca');" onclick="getsizes('cca');" id="cca"name="cca">
+                                        <option>CCA</option>
+                                        {% for cca in cca %}
+                                        <option>{{ cca.cca }}</option>
+                                        {% endfor %}
                                     </select>
                                     </div>
     
-                                    <div class="col col-sm-4"> 
-                                    <label class="col col-form-label col-form-label-sm" for="diameter">CCA</label>
-                                    <select class="form-select form-select-sm"  required onblur="getsizes('rim');" onclick="getsizes('rim');"   id="cca"name="cca">
-                                        <option>Rim Size</option>
-                                    </select>
-                                    </div>
+                                    
     
                                         
                                 </div>
@@ -178,7 +181,7 @@
     <div class="col-sm-4   d-flex justify-content-center">
         
 
-        <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/baseline_local_shipping_black_48dp.png" class="attachment-full size-full" alt="" loading="lazy" />
+        <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/baseline_local_shipping_black_48dp.png" class="attachment-full size-full" alt=""/>
         
         <h6 class="">Free Services</h6>
         
@@ -187,13 +190,13 @@
     <div class="col-sm-4   d-flex justify-content-center">
         
  														 
-        <img decoding="async"   src="https://www.shop.genapps.work/wp-content/uploads/2022/11/baseline_support_agent_black_48dp.png" class="attachment-full size-full" alt="" loading="lazy">
+        <img decoding="async"   src="https://www.shop.genapps.work/wp-content/uploads/2022/11/baseline_support_agent_black_48dp.png" class="attachment-full size-full" alt="">
         <h6>Quick response</h6>	
     </div>
 
     <div class="col-sm-4   d-flex justify-content-center">
         
-        <img decoding="async" src="https://www.shop.genapps.work/wp-content/uploads/2022/11/baseline_thumb_up_black_48dp.png" class="attachment-full size-full" alt="" loading="lazy"> 
+        <img decoding="async" src="https://www.shop.genapps.work/wp-content/uploads/2022/11/baseline_thumb_up_black_48dp.png" class="attachment-full size-full" alt=""> 
         <h6>Value for Money</h6>		
  
 </div>
@@ -211,19 +214,19 @@
             
         </div>
         <div class="col-sm-2  d-flex justify-content-center">
-            <img decoding="async"   src="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2.png"  class="img-fluid" alt="" loading="lazy" srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2.png 519w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2-300x300.png 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2-150x150.png 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2-100x100.png 100w" sizes="(max-width: 519px) 100vw, 519px">
+            <img decoding="async"   src="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2.png"  class="img-fluid" alt=""  srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2.png 519w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2-300x300.png 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2-150x150.png 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTAPPP-2-100x100.png 100w" sizes="(max-width: 519px) 100vw, 519px">
         </div>
         <div class="col-sm-2  d-flex justify-content-center">
-            <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1.png"  class="img-fluid" alt="" loading="lazy" srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1.png 521w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1-300x300.png 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1-150x150.png 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1-100x100.png 100w" sizes="(max-width: 521px) 100vw, 521px">
+            <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1.png"  class="img-fluid" alt=""  srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1.png 521w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1-300x300.png 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1-150x150.png 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTRA2-1-100x100.png 100w" sizes="(max-width: 521px) 100vw, 521px">
         </div>
         <div class="col-sm-2  d-flex justify-content-center">
-            <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3.png"  class="img-fluid" alt="" loading="lazy" srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3.png 522w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3-300x300.png 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3-150x150.png 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3-100x100.png 100w" sizes="(max-width: 522px) 100vw, 522px">
+            <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3.png"  class="img-fluid" alt=""  srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3.png 522w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3-300x300.png 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3-150x150.png 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/INSTA3-100x100.png 100w" sizes="(max-width: 522px) 100vw, 522px">
         </div>
         <div class="col-sm-2  d-flex justify-content-center">
-            <img decoding="async"   src="https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-1024x1024.jpg"  class="img-fluid" alt="" loading="lazy" srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-1024x1024.jpg 1024w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-300x300.jpg 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-150x150.jpg 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-768x768.jpg 768w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-600x600.jpg 600w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-100x100.jpg 100w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n.jpg 1080w" sizes="(max-width: 1024px) 100vw, 1024px">
+            <img decoding="async"   src="https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-1024x1024.jpg"  class="img-fluid" alt=""   srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-1024x1024.jpg 1024w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-300x300.jpg 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-150x150.jpg 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-768x768.jpg 768w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-600x600.jpg 600w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n-100x100.jpg 100w, https://www.shop.genapps.work/wp-content/uploads/2022/11/274072744_1632858907058253_8917029298714658015_n.jpg 1080w" sizes="(max-width: 1024px) 100vw, 1024px">
         </div>
         <div class="col-sm-2  d-flex justify-content-center">
-            <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-1024x1024.jpg"  class="img-fluid" alt="" loading="lazy" srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-1024x1024.jpg 1024w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-300x300.jpg 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-150x150.jpg 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-768x768.jpg 768w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-600x600.jpg 600w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-100x100.jpg 100w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n.jpg 1200w" sizes="(max-width: 1024px) 100vw, 1024px">
+            <img decoding="async"  src="https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-1024x1024.jpg"  class="img-fluid" alt=""   srcset="https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-1024x1024.jpg 1024w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-300x300.jpg 300w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-150x150.jpg 150w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-768x768.jpg 768w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-600x600.jpg 600w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n-100x100.jpg 100w, https://www.shop.genapps.work/wp-content/uploads/2022/11/311588749_1821728061504669_355550486947033650_n.jpg 1200w" sizes="(max-width: 1024px) 100vw, 1024px">
         </div>
         <div class="col-sm-1  d-flex justify-content-center">
             
