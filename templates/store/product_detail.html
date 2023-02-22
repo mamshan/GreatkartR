@@ -32,9 +32,9 @@
     <article class="content-body">
     
       {% if single_product.brandimg %}
-      <figcaption   style="height: 70px;">
+      <figcaption >
         {% if single_product.brandimg %}
-        <img style="max-height: 85px;max-width: 140px;padding-left: 10px;" class="img-fluid" src="{{ single_product.brandimg.url }}">
+        <img  class="img-fluid" src="{{ single_product.brandimg.url }}">
         {% else %}
         <div ></div>
         {% endif %}
@@ -90,10 +90,7 @@
              <div class="col-sm-4 fw-bold mb-1">Brand</div>
              <div class="col-sm-3">{{ single_product.brand }}</div>
         </div> <!-- row.// -->
-        <div class="row">
-          <div class="col-sm-4 fw-bold mb-1">Country</div>
-          <div class="col-sm-3">{{ single_product.country }}</div>
-        </div> <!-- row.// -->
+        
         <input type="hidden" id="skuno"  name="skuno" value="{{ single_product.skuno }}">
         
         <div class="row">

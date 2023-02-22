@@ -11,7 +11,7 @@
         </div>
     </div> <!-- container //  -->
     
-    <div class='col-lg-12 seimg' style="background: url('{{ STATIC_URL }}static/images/banners/Safety.png') no-repeat;">
+    <div id="fbg" class='col-lg-12 seimg d-flex justify-content-center' style="background: url('{{ STATIC_URL }}static/images/banners/1b.jpg');">
         
         
 
@@ -22,10 +22,10 @@
                 <h4 class="small">Are you looking for </h4>
                 <ul class="nav nav-pills nav-fill mb-2" role="tablist">
                     <li class="nav-item" role="presentation">
-                      <a class="nav-link active link-light"  id="tyre-tab" data-bs-toggle="tab" role="tab"  aria-controls="tyre" data-bs-target="#tyre"  aria-selected="true" href="#">Tyres</a>
+                      <a class="nav-link active link-light"  onclick="fbgchg();" id="tyre-tab" data-bs-toggle="tab" role="tab"  aria-controls="tyre" data-bs-target="#tyre"  aria-selected="true" href="#">Tyres</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                      <a class="nav-link link-light"  id="battery-tab" data-bs-toggle="tab"  role="tab" aria-controls="battery" data-bs-target="#battery"  aria-selected="false" href="#">Batteries</a>
+                      <a class="nav-link link-light"  onclick="fbgchg();" id="battery-tab" data-bs-toggle="tab"  role="tab" aria-controls="battery" data-bs-target="#battery"  aria-selected="false" href="#">Batteries</a>
                     </li>
                     
                   </ul>
@@ -33,16 +33,10 @@
                   <div class="tab-content" id="myTabContent">
                 
                 <div   id="tyre" aria-labelledby="tyre-tab" class="tab-pane fade show active">
-                   <div class="row">
-                    <div class="col-sm-5 ">
-                        <div class="col-sm-12">
-                        <p class="small">How to find car tyre size? <br>
-                            225 is the section width of a tyre, 55 is Aspect Ratio of tyre, 18 is Diameter of the wheel rim</p>
-                            
-                            <img class="img-fluid" src="{% static 'images/banners/tyresize.png' %}">
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
+                    
+                    <img style="max-height: 150px;" class="img-fluid mx-auto d-block" src="{% static 'images/banners/tyresize.png' %}">
+                     
+                    <div class="row">
                         <form action="{% url 'search_size' %}" method="GET" class="search">
                             <div class="row mb-3">
                                 <div class="col col-sm-4"> 
@@ -88,21 +82,16 @@
                             
                         </form> 
                     </div>
-                </div>
+                 
                 </div> <!-- row.// -->
                 
                 <div   id="battery" aria-labelledby="battery-tab" class="tab-pane fade">
 
 
-                    <div class="row">
-                        <div class="col-sm-5 ">
-                            <div class="col-sm-12">
-                            <p class="small">Find By AH : Ampere hours or CCA : Cold cranking amps </p> 
-
-                            <img class="img-fluid" src="{% static 'images/banners/battery.png' %}">
-                            </div>
-                        </div>
-                        <div class="col-sm-7">
+                     
+                            <img style="max-height: 150px;" class="img-fluid  mx-auto d-block" src="{% static 'images/banners/battery.png' %}">
+                           
+                        <div class="row">
                             <form action="{% url 'search_size' %}" method="GET" class="search">
                                 <div class="row mb-3">
                                     <div class="col col-sm-4"> 
@@ -153,7 +142,7 @@
                         </div>
                     </div>
 
-                </div>
+                 
             </div>
                 
                 </div><!-- container // -->

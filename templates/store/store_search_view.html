@@ -197,9 +197,9 @@
 					<div class="row">
 						<div style="padding-top: 7%;">
 							{% if product.brandimg %}
-							<figcaption   style="height: 70px;">
+							<figcaption  >
 								{% if product.brandimg %}
-								<img style="max-height: 85px;max-width: 140px;padding-left: 10px;" class="img-fluid" src="{{ product.brandimg.url }}">
+								<img  class="img-fluid" src="{{ product.brandimg.url }}">
 								{% else %}
 								<div ></div>
 								{% endif %}
@@ -215,10 +215,7 @@
 						</div>
 					</div>
 
-					<div class="row">
-						 
-						<div  style="padding-left: 10%;"><span class="price" >Country : </span>{{ product.country }} </div>
-					</div>	
+					 	
 
 					<div class="row">
 						<div class="price" style="padding-top: 10%;width: 90%;border-bottom: 0.1rem solid;"></div>

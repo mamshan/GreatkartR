@@ -1575,13 +1575,11 @@ div {
 
 
 @media only screen and (min-width: 1167px) {
-.searchseation {
-    top:200px;
+.searchseation { 
     width: calc(50%);
     height: auto;
     padding: 14px 10px 10px 10px;
-    margin-left: 10px;
-    position: relative;
+    margin-left: 10px; 
     background-color: rgba(50,50,50,.9);
 }
 }
