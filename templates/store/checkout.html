@@ -9,43 +9,98 @@
             <aside class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title mb-4">Billing Address</h4>
-                        <form action="{% url 'place_order' %}" method="POST">
+                        <h4 class="card-title mb-4">Billing Details</h4>
+                       
+                        <form action="{% url 'place_order' %}" method="POST" class="needs-validation" novalidate>
                             {% csrf_token %}
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">First Name</label>
-                                    <input type="text" name="first_name" class="form-control" required>
+                            <div class="row g-3">
+                              <div class="col-sm-6">
+                                <label for="first_name" class="form-label">First name</label>
+                                <input type="text" class="form-control"  name="first_name" id="first_name" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                  Valid first name is required.
                                 </div>
-                                <div class="col form-group">
-                                    <label for="">Last Name</label>
-                                    <input type="text" name="last_name" class="form-control" required>
+                              </div>
+                  
+                              <div class="col-sm-6">
+                                <label for="last_name" class="form-label">Last name</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                  Valid last name is required.
                                 </div>
+                              </div>
+                  
+                               
+                  
+                              <div class="col-12">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" required>
+                                <div class="invalid-feedback">
+                                  Please enter a valid email address for shipping updates.
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <label for="email" class="form-label">Phone Number</label>
+                                <input type="text" name="phone" class="form-control" id="phone"  required>
+                                <div class="invalid-feedback">
+                                  Please enter a valid email address for shipping updates.
+                                </div>
+                              </div>
+                              <div class="col-12">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" name="address_line_1" id="address_line_1" placeholder="1234 Main St" required>
+                                <div class="invalid-feedback">
+                                  Please enter your shipping address.
+                                </div>
+                              </div>
+                  
+                              <div class="col-12">
+                                <label for="address2" class="form-label">Address 2 <span class="text-muted">(Optional)</span></label>
+                                <input type="text" class="form-control" name="address_line_2" id="address_line_2" placeholder="Apartment or suite">
+                              </div>
+                  
+                              <div class="col-md-5">
+                                <label for="country" class="form-label">Country</label>
+                                <select class="form-select" name="country" id="country" required>
+                                  <option value="">Choose...</option>
+                                  <option>United States</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please select a valid country.
+                                </div>
+                              </div>
+                  
+                              <div class="col-md-4">
+                                <label for="state" class="form-label">State</label>
+                                <select class="form-select" id="state" required>
+                                  <option value="">Choose...</option>
+                                  <option>California</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                  Please provide a valid state.
+                                </div>
+                              </div>
+                  
+                              <div class="col-md-3">
+                                <label for="zip" class="form-label">Zip</label>
+                                <input type="text" class="form-control" id="zip" placeholder="" required>
+                                <div class="invalid-feedback">
+                                  Zip code required.
+                                </div>
+                              </div>
+
+                              <div class="col-12">
+                                <label for="address2" class="form-label">Order Note <span class="text-muted">(Optional)</span></label>
+                                <input type="text" class="form-control" name="order_note" id="order_note" placeholder="Order Note">
+                              </div>
+                  
+
                             </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">Email</label>
-                                    <input type="email" name="email" class="form-control" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="">Phone Number</label>
-                                    <input type="text" name="phone" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col form-group">
-                                    <label for="">Address Line 1</label>
-                                    <input type="text" name="address_line_1" class="form-control" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="">Address Line 2</label>
-                                    <input type="text" name="address_line_2" class="form-control">
-                                </div>
-                            </div> 
-                            <div class="form-row">
-                                <label for="">Order Note</label>
-                                <textarea name="order_note" rows="2" class="form-control"></textarea>
-                            </div>
+                  
+                            
+                             
+                         
+
                     </div>
                 </div> <!-- card.// -->
 
@@ -55,7 +110,7 @@
                     <div class="card-body">
                         <table class="table table-borderless table-shopping-cart">
                             <thead class="text-muted">
-                                <tr class="small text-uppercase">
+                                <tr class="small">
                                     <th scope="col">Product</th>
                                     <th scope="col" width="120">Quantity</th>
                                     <th scope="col" width="120">Price</th>

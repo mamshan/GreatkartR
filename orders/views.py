@@ -7,6 +7,7 @@ from .models import Order, Payment, OrderProduct
 from store.models import Product
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+import hashlib
 
 
 def sendEmail(request, order):
@@ -45,7 +46,10 @@ def payments(request):
             order.is_ordered = True
             order.save()
 
+            # SFDSF SDFSDFDSFSD
             # Chuyển hết cart_item thành order_product
+            # ASDSAASDD ASDASD
+            
             cart_items = CartItem.objects.filter(user=request.user)
             for item in cart_items:
                 
@@ -130,12 +134,27 @@ def place_order(request, total=0, quantity=0,):
             data.save()
 
             order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
-            context = {
+
+
+            merchantSecret  = 'MTg2OTg3Nzc1NjI5NTg0MjEyMTkyMzYxNDc0NTAxMjUwMzY3MDA0Mw=='
+            merchantId      = '1221865'
+            orderId         = order.order_number
+            amount          = grand_total
+            hashedSecret    = (hashlib.md5(merchantSecret.encode()).hexdigest()).upper()
+            amountFormated  =  "%0.2f" % amount
+            currency        = 'LKR'
+            hash            = (hashlib.md5((str(merchantId) + str(orderId) + str(amountFormated) + str(currency) + str(hashedSecret)).encode()).hexdigest()).upper()
+            
+             
+            
+            
+            context = { 
                 'order': order,
                 'cart_items': cart_items,
-                'total': total,
+                'total': amountFormated,
                 'tax': tax,
-                'grand_total': grand_total,
+                'hash': hash, 
+                'grand_total': amountFormated,
             }
             return render(request, 'orders/payments.html', context)
     else:

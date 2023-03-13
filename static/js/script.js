@@ -58,5 +58,15 @@ $(document).ready(function() {
         interval: 2000, 
       })
 }); 
+
+function fbgchg() {
+    console.log(document.getElementById("fbg").style.backgroundImage);
+    if (document.getElementById("fbg").style.backgroundImage == "url(\"static/images/banners/1f.webp\")") {
+        document.getElementById("fbg").style.backgroundImage = "url('static/images/banners/1b.jpg')";
+    } else {
+        document.getElementById("fbg").style.backgroundImage = "url('static/images/banners/1f.webp')";
+    }
+
+}
 // jquery end
 

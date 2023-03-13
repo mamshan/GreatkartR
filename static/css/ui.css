@@ -1520,20 +1520,17 @@ element.style {
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+ 
 div {
     display: block;
 }
-.modal-content {
-  border-radius: 0rem;
-}
+ 
+ 
 
-.btn {
-  border-radius: 0rem;
-}
-
-.form-control {
-  border-radius: 0rem;
+ 
+.logo {
+  
+  max-height: 39px; 
 }
 
 .blHMux svg {
@@ -1575,13 +1572,11 @@ div {
 
 
 @media only screen and (min-width: 1167px) {
-.searchseation {
-    top:200px;
+.searchseation { 
     width: calc(50%);
     height: auto;
     padding: 14px 10px 10px 10px;
-    margin-left: 10px;
-    position: relative;
+    margin-left: 10px; 
     background-color: rgba(50,50,50,.9);
 }
 }

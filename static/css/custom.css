@@ -207,3 +207,28 @@ a:hover, a:focus {
 	     background-color: transparent;
         border: none;
 	}
+
+	.float{
+		z-index: 999;
+		position:fixed;
+		width:60px;
+		height:60px;
+		bottom:40px;
+		right:40px;
+		background-color: blue;
+		color:#FFF;
+		border-radius:48px;
+		text-align:center;
+	}
+	a.float:hover {
+		color:#FFF;	
+	}
+	a.float:visited {
+		color:#FFF;	
+	}
+	a.float:focus {
+		color:#FFF;	
+	}
+	.my-float{
+		margin-top:22px;
+	}

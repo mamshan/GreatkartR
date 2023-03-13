@@ -1520,20 +1520,17 @@ element.style {
 *, *::before, *::after {
     box-sizing: border-box;
 }
-user agent stylesheet
+ 
 div {
     display: block;
 }
-.modal-content {
-  border-radius: 0rem;
-}
+ 
+ 
 
-.btn {
-  border-radius: 0rem;
-}
-
-.form-control {
-  border-radius: 0rem;
+ 
+.logo {
+  
+  max-height: 39px; 
 }
 
 .blHMux svg {

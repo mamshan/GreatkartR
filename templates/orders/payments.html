@@ -2,37 +2,48 @@
 {% load static %}
 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
 <section class="section-content padding-y bg">
 	<div class="container">
+		<form action="https://sandbox.payhere.lk/pay/checkout" method="POST" class="needs-validation" novalidate>
 		<!-- ============================ COMPONENT 1 ================================= -->
 		<div class="row">
-			<h4 class="text-center m-auto mb-6">
+			<h4 class="text-center m-auto mb-3">
 				Review your Order and Make Payment
 			</h4>
-			<aside class="col-lg-8">
-				<div class="card">
-                    <h5 class="card-header">Billing Address</h5>
+			<aside class="col-lg-8 ">
+				<div class="card  mb-3">
+                    <h5 class="card-header">Billing Details</h5>
                     <div class="card-body">
-                        <p class="card-text mb-0">{{ order.full_name }}</p>
-                        <p class="card-text mb-0">{{ order.full_address }}</p>
-                        <p class="card-text mb-0">{{ order.city }}, {{ order.state }}</p>
-                        <p class="card-text mb-0">{{ order.country }}</p>
-                        <p class="card-text mb-0">{{ order.email }}</p>
-                        <p class="card-text mb-0">{{ order.phone }}</p>
+
+						<input type="hidden" name="hash" value="{{ hash }}">    <!-- Replace with generated hash -->
+						<input type="hidden" name="merchant_id" value="1221865">    <!-- Replace your Merchant ID -->
+						
+						<input type="hidden" name="return_url" value="https://genapps.work/return_url.php?order_id={{ order.order_number  }}">
+						<input type="hidden" name="cancel_url" value="https://genapps.work/cancel_url.php">
+						<input type="hidden" name="notify_url" value="https://genapps.work/notify_url.php">  
+						<input type="hidden" name="last_name" value="ls">  
+						<input type="hidden" name="order_id" value="{{ order.order_number }}">  
+						
+						<input type="hidden" name="items" value="Items">
+
+						<input type="hidden" name="currency" value="LKR">
+						<input type="hidden" name="amount" value="{{ grand_total }}">
+						 
+                        <p class="card-text mb-0"><input type="text" readonly  class="form-control-plaintext" name="first_name" value="{{ order.full_name }}"> </p>
+                        <p class="card-text mb-0"><input type="text" readonly  class="form-control-plaintext" name="address" value="{{ order.full_address }}"></p>
+                        <p class="card-text mb-0"><input type="text" readonly  class="form-control-plaintext" name="city" value="Colombo"></p>
+                        <p class="card-text mb-0"><input type="text" readonly  class="form-control-plaintext" name="country" value="Sri Lanka"></p>
+                        <p class="card-text mb-0"><input type="text" readonly  class="form-control-plaintext" name="email" value="{{ order.email }}"></p>
+                        <p class="card-text mb-0"><input type="text" readonly  class="form-control-plaintext" name="phone" value="{{ order.phone }}"></p>
                         {% if order.order_note %}
                             <b>Order Note: </b> {{ order.order_note }}
                         {% endif %}
                     </div>
 				</div>
-				<div class="card">
-                    <h5 class="card-header">Payment Method</h5>
-                    <div class="card-body">
-                        <p class="card-text">
-                            
-                        </p>
-                    </div>
-				</div>
-				<div class="card">
+				 
+				<div class="card mb-3">
                     <h5 class="card-header">Review Products</h5>
                     <div class="card-body">
                         <table class="table table-borderless table-shopping-cart">
@@ -95,6 +106,8 @@
 						<div id="paypal-button-container">
 
 						</div>
+						<input type="submit" value="Buy Now">   
+
 						<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
 					</div>
 					<!-- card-body.// -->
@@ -104,6 +117,7 @@
 			<!-- col.// -->
 		</div>
 		<!-- row.// -->
+		</form>
 		<!-- ============================ COMPONENT 1 END .// ================================= -->
 	</div>
 	<!-- container .//  -->
@@ -125,14 +139,29 @@
 		return cookieValue;
 	}
 
-	grand_total = ("{{ grand_total }}"/375)
-	var amount = parseFloat("{{ grand_total }}");
+ 
+
+/*
+	let merchantSecret  = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+	let merchantId      = '2xxxxx';
+	let orderId         = '12345';
+	let amount          = "{{ grand_total }}";
+	let hashedSecret    = CryptoJS.MD5(merchantSecret).toString().toUpperCase();
+	let amountFormated  = parseFloat( amount ).toLocaleString( 'en-us', { minimumFractionDigits : 2 } ).replaceAll(',', '');
+	let currency        = 'LKR';
+	let hash            = CryptoJS.MD5(merchantId + orderId + amountFormated + currency + hashedSecret).toString().toUpperCase();
+
+*/	 
+	 
+
+
+	
 	var url = "{% url 'payments' %}";
 	var csrfToken = getCookie('csrftoken');
 	var orderID = "{{ order.order_number }}";
 	var paymentMethod = 'PayPal';
-	var redirectUrl = "{% url 'order_complete' %}"
-
+	var redirectUrl = "{% url 'order_complete' %}";
+	  
 	paypal.Buttons({
 		// Style for button
 		style: {
